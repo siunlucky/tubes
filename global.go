@@ -40,7 +40,7 @@ type Customer struct {
 	transactions  []Transaction
 	nTransaction  int
 	cardNumber    int
-	PIN           int
+	PIN           string
 	NIK           int
 	name          string
 	address       Address

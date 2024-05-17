@@ -48,6 +48,7 @@ func menu() {
 		loginAdmin()
 		mainMenuAdmin()
 	case 3:
+		clearTerminal()
 		mainMenuCustomer()
 	case 4:
 		exit()
