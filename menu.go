@@ -42,9 +42,9 @@ func mainMenuAdmin() {
 	for adminStart {
 		fmt.Println("\nAdmin Menu")
 		fmt.Println("1. Insert Customer Data")
-		fmt.Println("2. View Bank Data")
-		fmt.Println("3. Edit Bank Data")
-		fmt.Println("4. Delete Bank")
+		fmt.Println("2. View Customer Data")
+		fmt.Println("3. Edit Customer Data")
+		fmt.Println("4. Delete Customer")
 		fmt.Println("5. Logout")
 		fmt.Print("Input : ")
 		fmt.Scan(&adminChoice)
@@ -53,7 +53,7 @@ func mainMenuAdmin() {
 			case 1:
 				insertDataBank(&worldBank)
 			case 2:
-				viewDataBank(worldBank)
+				viewDataCustomer(uniqueBankCode, worldBank)
 			case 3:
 				editDataBank(&worldBank)
 			case 4:

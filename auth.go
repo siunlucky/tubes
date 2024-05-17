@@ -42,9 +42,12 @@ func loginSuperAdmin() {
 }
 
 // loginAdmin function to login as admin
+
+var uniqueBankCode int
+
 func loginAdmin() {
 	var credential Credential
-	var maxTrial, uniqueBankCode int
+	var maxTrial int
 
 	maxTrial = 1
 	fmt.Println("Welcome to Dashboard World Bank System")
@@ -80,8 +83,9 @@ func loginAdmin() {
 }
 
 // login function to login as customer
-func loginCustomer() {
-	var accountNumber, PIN int
+func login() {
+	var accountNumber int
+	var PIN string
 	for attempts := 0; attempts < 3; attempts++ {
 		fmt.Println()
 		fmt.Println("========================================")
@@ -128,6 +132,7 @@ func logout() {
 		menu()
 	} else if logout == "N" || logout == "n" {
 		clearTerminal()
+		uniqueBankCode = 0
 		menu()
 	}
 }
