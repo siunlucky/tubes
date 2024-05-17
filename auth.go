@@ -41,6 +41,7 @@ func loginSuperAdmin() {
 	fmt.Println("Login Success!")
 }
 
+// loginAdmin function to login as admin
 func loginAdmin() {
 	var credential Credential
 	var maxTrial, uniqueBankCode int
@@ -76,6 +77,29 @@ func loginAdmin() {
 	loading("Checking Credentials")
 
 	fmt.Println("Login Success!")
+}
+
+// login function to login as customer
+func login() {
+	var accountNumber, PIN int
+	for attempts := 0; attempts < 3; attempts++ {
+		fmt.Print("Masukkan nomor rekening: ")
+		fmt.Scan(&accountNumber)
+		fmt.Print("Masukkan PIN: ")
+		fmt.Scan(&PIN)
+
+		for i := 0; i < customerBank.nCustomer; i++ {
+			if customerBank.customers[i].accountNumber == accountNumber && customerBank.customers[i].PIN == PIN {
+				fmt.Println("Login berhasil.")
+				customerMenu(&customerBank.customers[i])
+				return
+			}
+		}
+
+		fmt.Println("Nomor rekening atau PIN salah.")
+	}
+
+	fmt.Println("Akun sudah masuk ke maksimal login, silakan coba lagi.")
 }
 
 // logoutSuperAdmin function to logout the super admin
