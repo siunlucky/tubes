@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func dummy() {
+func dummyData() {
 	dummyCustomers := []Customer{
 		{accountNumber: 1001, balance: 0, PIN: 1234, NIK: 111111, name: "Dummy1", address: Address{district: "Dist1", city: "City1", province: "Prov1"}, isSuspended: false},
 		{accountNumber: 1002, balance: 0, PIN: 1234, NIK: 111112, name: "Dummy2", address: Address{district: "Dist2", city: "City2", province: "Prov2"}, isSuspended: false},
@@ -16,8 +16,14 @@ func dummy() {
 			customerBank.customers[customerBank.nCustomer] = dummyCustomers[i]
 			customerBank.nCustomer++
 		} else {
-			fmt.Println("Customer bank is full, unable to add more customers.")
-			break
+			fmt.Println("Customer bank is full, unable to add more customers")
+			i = 2000
+			
+			fmt.Println("Back to Main Menu")
+			loadingAuth("Loading")
+			fmt.Println()
+			menu()
 		}
 	}
 }
+

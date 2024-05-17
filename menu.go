@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	// "reflect"
+)
 
 var superAdminStart bool = true
 var superAdminChoice int
@@ -63,38 +66,36 @@ func mainMenuAdmin() {
 }
 
 func mainMenuCustomer() {
-	dummy()
+	dummyData()
 	for {
-		fmt.Println("Menu Customer:")
+		fmt.Println("========================================")
+		fmt.Println("=             Menu Customer            =")
+		fmt.Println("========================================")
 		fmt.Println("1. Login")
-		fmt.Println("2. Register")
-		fmt.Println("3. Logout")
-		fmt.Print("Pilih menu: ")
+		fmt.Print("Choose the menu option with number : ")
 
 		var choice int
 		fmt.Scan(&choice)
 
-		switch choice {
-		case 1:
-			login()
-		case 2:
-			register()
-		case 3:
-			fmt.Println("Logout berhasil.")
-			return
-		default:
-			fmt.Println("Pilihan tidak valid.")
+		if choice == 1 {
+			loginCustomer()
+		} else {
+			fmt.Println("Input is not valid, please try again")
+			fmt.Println()
 		}
 	}
 }
 
 func customerMenu(customer *Customer) {
-	for {
-		fmt.Println("Menu Customer:")
-		fmt.Println("1. Cek Saldo")
+	var startCustomerMenu bool = true
+	for startCustomerMenu {
+		fmt.Println()
+		fmt.Println("========================================")
+		fmt.Println("=             Customer Menu            =")
+		fmt.Println("1. View Balance")
 		fmt.Println("2. Transfer")
-		fmt.Println("3. Kembali")
-		fmt.Print("Pilih menu: ")
+		fmt.Println("3. Logout")
+		fmt.Print("Choose the menu option with number : ")
 
 		var choice int
 		fmt.Scan(&choice)
@@ -105,7 +106,7 @@ func customerMenu(customer *Customer) {
 		case 2:
 			transfer(customer)
 		case 3:
-			return
+			startCustomerMenu = false
 		default:
 			fmt.Println("Pilihan tidak valid.")
 		}

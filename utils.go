@@ -7,6 +7,22 @@ import (
 	"github.com/inancgumus/screen"
 )
 
+func loadingFailLogin() {
+	fmt.Println("Please wait for 1 Minute to try again!")
+	fmt.Println()
+	time.Sleep(3 * time.Second)
+	mainMenuCustomer()
+}
+
+func loadingAuth(message string) {
+	fmt.Print(message, ".\n")
+	time.Sleep(500 * time.Millisecond)
+	fmt.Print(message, "..\n")
+	time.Sleep(500 * time.Millisecond)
+	fmt.Print(message, "...\n")
+	time.Sleep(500 * time.Millisecond)
+}
+
 func loading(message string) {
 	clearTerminal()
 	fmt.Print(message, ".\n")
