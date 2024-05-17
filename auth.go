@@ -83,7 +83,7 @@ func loginAdmin() {
 }
 
 // login function to login as customer
-func login() {
+func loginCustomer() {
 	var accountNumber int
 	var PIN string
 	for attempts := 0; attempts < 3; attempts++ {
