@@ -11,11 +11,11 @@ func viewDataCustomer(uniqueBankCode int, worldBank WorldBank) {
 
 	if bankIdx == -1 {
 		fmt.Println("Bank not found.")
-		return
+		mainMenuAdmin()
 	}
 
 	for startViewCustomer {
-		if worldBank.nBank == 0 {
+		if worldBank.Banks[bankIdx].nCustomer == 0 {
 			fmt.Println("There is no data to be viewed.")
 			startViewCustomer = false
 			adminChoice = 0
@@ -157,9 +157,123 @@ func insertDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 	}
 }
 
+func editDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
+	var customerIndex, bankIdx, choice int
+
+	bankIdx = searchBankByUniqueCode(uniqueBankCode)
+
+	if worldBank.Banks[bankIdx].nCustomer == 0 {
+		fmt.Println("There is no data to be edited.")
+		mainMenuAdmin()
+	}
+
+	for customerIndex != -1 {
+		viewDataCustomer(uniqueBankCode, *worldBank)
+
+		fmt.Print("Input Customer Number (input -1 for cancel) : ")
+		fmt.Scan(&customerIndex)
+		for searchCustomerByIdx(bankIdx, customerIndex-1) == -1 && customerIndex != -1 {
+			fmt.Println("Customer Number is not available.")
+			fmt.Print("Input Customer Number (input -1 for cancel) : ")
+			fmt.Scan(&customerIndex)
+		}
+
+		for choice != 5 && customerIndex != -1 {
+			fmt.Println("1. Edit Name")
+			fmt.Println("2. Edit Address")
+			fmt.Println("3. Edit Suspended Status")
+			fmt.Println("4. Reset PIN")
+			fmt.Println("5. Save")
+			fmt.Print("Input : ")
+			fmt.Scan(&choice)
+			for choice < 1 || choice > 5 {
+				fmt.Print("Input : ")
+				fmt.Scan(&choice)
+			}
+
+			switch choice {
+			case 1:
+				fmt.Println("Old Name :", worldBank.Banks[bankIdx].customers[customerIndex-1].name)
+				fmt.Print("New Name : ")
+				fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].name)
+				for worldBank.Banks[bankIdx].customers[customerIndex-1].name == "" || len(worldBank.Banks[bankIdx].customers[customerIndex-1].name) < 3 {
+					if worldBank.Banks[bankIdx].customers[customerIndex-1].name == "" {
+						fmt.Println("Name field may not be empty.")
+					} else if len(worldBank.Banks[bankIdx].customers[customerIndex-1].name) < 3 {
+						fmt.Println("Name should be contain more than 3 char.")
+					}
+					fmt.Print("New Name : ")
+					fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].name)
+				}
+				fmt.Print("Customer Name Edited Successfully\n")
+				viewDataCustomer(uniqueBankCode, *worldBank)
+				fmt.Println()
+			case 2:
+				fmt.Println("Old Address :", worldBank.Banks[bankIdx].customers[customerIndex-1].address.district, worldBank.Banks[bankIdx].customers[customerIndex-1].address.city, worldBank.Banks[bankIdx].customers[customerIndex-1].address.province)
+				fmt.Print("New Address")
+				fmt.Print("District : ")
+				fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].address.district)
+				for worldBank.Banks[bankIdx].customers[customerIndex-1].address.district == "" || len(worldBank.Banks[bankIdx].customers[customerIndex-1].address.district) < 3 {
+					if worldBank.Banks[bankIdx].customers[customerIndex-1].address.district == "" {
+						fmt.Println("District field may not be empty.")
+					} else if len(worldBank.Banks[bankIdx].customers[customerIndex-1].address.district) < 3 {
+						fmt.Println("District should be contain more than 3 char.")
+					}
+					fmt.Print("District : ")
+					fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].address.district)
+				}
+				fmt.Print("City : ")
+				fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].address.city)
+				for worldBank.Banks[bankIdx].customers[customerIndex-1].address.city == "" || len(worldBank.Banks[bankIdx].customers[customerIndex-1].address.city) < 3 {
+					if worldBank.Banks[bankIdx].customers[customerIndex-1].address.city == "" {
+						fmt.Println("City field may not be empty.")
+					} else if len(worldBank.Banks[bankIdx].customers[customerIndex-1].address.city) < 3 {
+						fmt.Println("City should be contain more than 3 char.")
+					}
+					fmt.Print("City : ")
+					fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].address.city)
+				}
+				fmt.Print("Province : ")
+				fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].address.province)
+				for worldBank.Banks[bankIdx].customers[customerIndex-1].address.province == "" || len(worldBank.Banks[bankIdx].customers[customerIndex-1].address.province) < 3 {
+					if worldBank.Banks[bankIdx].customers[customerIndex-1].address.province == "" {
+						fmt.Println("Province field may not be empty.")
+					} else if len(worldBank.Banks[bankIdx].customers[customerIndex-1].address.province) < 3 {
+						fmt.Println("Province should be contain more than 3 char.")
+					}
+					fmt.Print("Province : ")
+					fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].address.province)
+				}
+				fmt.Print("Customer Address Edited Successfully\n")
+				viewDataCustomer(uniqueBankCode, *worldBank)
+				fmt.Println()
+			case 3:
+				worldBank.Banks[bankIdx].customers[customerIndex-1].isSuspended = !worldBank.Banks[bankIdx].customers[customerIndex-1].isSuspended
+				fmt.Print("Customer Suspended Status Edited Successfully\n")
+				viewDataCustomer(uniqueBankCode, *worldBank)
+				fmt.Println()
+			case 4:
+				fmt.Print("New PIN : ")
+				fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].PIN)
+				for worldBank.Banks[bankIdx].customers[customerIndex-1].PIN == "" || len(worldBank.Banks[bankIdx].customers[customerIndex-1].PIN) != 6 {
+					if worldBank.Banks[bankIdx].customers[customerIndex-1].PIN == "" {
+						fmt.Println("PIN field may not be empty.")
+					} else if len(worldBank.Banks[bankIdx].customers[customerIndex-1].PIN) != 6 {
+						fmt.Println("PIN should be contain 6 char.")
+					}
+					fmt.Print("New PIN : ")
+					fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].PIN)
+				}
+				fmt.Print("Customer PIN Reset Successfully\n")
+				viewDataCustomer(uniqueBankCode, *worldBank)
+				fmt.Println()
+			}
+		}
+	}
+}
+
 func deleteDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 	var customerIndex int
-	// var found bool
 
 	var bankIdx int = searchBankByUniqueCode(uniqueBankCode)
 
@@ -169,11 +283,26 @@ func deleteDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 	}
 
 	for customerIndex != -1 {
-		viewDataCustomer(bankIdx, *worldBank)
+		viewDataCustomer(uniqueBankCode, *worldBank)
 
 		fmt.Print("Input Customer Number (input -1 for cancel) : ")
 		fmt.Scan(&customerIndex)
+		for searchCustomerByIdx(bankIdx, customerIndex-1) == -1 && customerIndex != -1 {
+			fmt.Println("Customer Number is not available.")
+			fmt.Print("Input Customer Number (input -1 for cancel) : ")
+			fmt.Scan(&customerIndex)
+		}
 
+		if customerIndex != -1 {
+			for i := customerIndex - 1; i < worldBank.Banks[bankIdx].nCustomer; i++ {
+				worldBank.Banks[bankIdx].customers[i] = worldBank.Banks[bankIdx].customers[i+1]
+			}
+			worldBank.Banks[bankIdx].nCustomer--
+
+			fmt.Println("Customer Data Deleted Successfully")
+			mainMenuAdmin()
+			fmt.Println()
+		}
 	}
 }
 

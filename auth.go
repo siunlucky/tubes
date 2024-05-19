@@ -111,7 +111,7 @@ func loginCustomer() {
 }
 
 // logoutSuperAdmin function to logout the super admin
-func logout() {
+func logoutSuperAdmin() {
 	var logout string
 	fmt.Println("Are you sure want to logout? (Y/N)")
 
@@ -128,12 +128,37 @@ func logout() {
 		fmt.Println("You will redirect to the main menu in 3 seconds")
 		time.Sleep(3 * time.Second)
 		clearTerminal()
-
 		menu()
+		uniqueBankCode = 0
 	} else if logout == "N" || logout == "n" {
 		clearTerminal()
-		uniqueBankCode = 0
+		mainMenuSuperAdmin()
+	}
+}
+
+// logoutAdmin function to logout the admin
+func logoutAdmin() {
+	var logout string
+	fmt.Println("Are you sure want to logout? (Y/N)")
+
+	fmt.Scan(&logout)
+	for logout != "Y" && logout != "y" && logout != "N" && logout != "n" {
+		fmt.Println("Please input the right option")
+		fmt.Scan(&logout)
+	}
+
+	if logout == "Y" || logout == "y" {
+		loading("Logging Out")
+		fmt.Print("Logging Out Success!\n")
+		fmt.Println("Thank you for using our service!")
+		fmt.Println("You will redirect to the main menu in 3 seconds")
+		time.Sleep(3 * time.Second)
+		clearTerminal()
 		menu()
+		uniqueBankCode = 0
+	} else if logout == "N" || logout == "n" {
+		clearTerminal()
+		mainMenuAdmin()
 	}
 }
 
@@ -149,9 +174,7 @@ func isSuperAdmin(credential Credential) bool {
 
 // isAdmin function to check the credential
 func isAdmin(uniqueBankCode int, credential Credential) bool {
-	var idx int
-
-	idx = searchBankByUniqueCode(uniqueBankCode)
+	var idx int = searchBankByUniqueCode(uniqueBankCode)
 
 	if idx == -1 {
 		return false

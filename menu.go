@@ -29,7 +29,7 @@ func mainMenuSuperAdmin() {
 			case 4:
 				deleteDataBank(&worldBank)
 			case 5:
-				logout()
+				logoutSuperAdmin()
 			}
 		}
 	}
@@ -40,7 +40,9 @@ var adminChoice int
 
 func mainMenuAdmin() {
 	for adminStart {
-		fmt.Println("\nAdmin Menu")
+		fmt.Println("\n========================================")
+		fmt.Println("=              Menu Admin              =")
+		fmt.Println("========================================")
 		fmt.Println("1. Insert Customer Data")
 		fmt.Println("2. View Customer Data")
 		fmt.Println("3. Edit Customer Data")
@@ -55,11 +57,11 @@ func mainMenuAdmin() {
 			case 2:
 				viewDataCustomer(uniqueBankCode, worldBank)
 			case 3:
-				editDataBank(&worldBank)
+				editDataCustomer(uniqueBankCode, &worldBank)
 			case 4:
-				deleteDataBank(&worldBank)
+				deleteDataCustomer(uniqueBankCode, &worldBank)
 			case 5:
-				logout()
+				logoutAdmin()
 			}
 		}
 	}
