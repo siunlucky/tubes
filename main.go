@@ -24,7 +24,6 @@ func menu() {
 	fmt.Println("1. Super Admin")
 	fmt.Println("2. Bank Admin")
 	fmt.Println("3. Customer")
-	fmt.Println("4. Exit")
 
 	for startMenu {
 		fmt.Print("Input the option in number : ")

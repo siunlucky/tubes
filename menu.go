@@ -29,7 +29,7 @@ func mainMenuSuperAdmin() {
 			case 4:
 				deleteDataBank(&worldBank)
 			case 5:
-				logout()
+				logoutSuperAdmin()
 			}
 		}
 	}
@@ -61,7 +61,7 @@ func mainMenuAdmin() {
 			case 4:
 				deleteDataCustomer(uniqueBankCode, &worldBank)
 			case 5:
-				logout()
+				logoutAdmin()
 			}
 		}
 	}
