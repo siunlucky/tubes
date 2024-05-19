@@ -77,6 +77,6 @@ type Bill struct {
 }
 
 var bills = []Bill{
-	{description: "Electricity Bill", amount: 120000, isPaid: false},
-	{description: "HUTANG Payment", amount: 500000, isPaid: false},
+	{description: "Electrict Bill", amount: 120000, isPaid: false},
+	{description: "HUTANG Bill", amount: 500000, isPaid: false},
 }
