@@ -87,6 +87,8 @@ func insertDataBank(worldBank *WorldBank) {
 				fmt.Println("Unique Code is not available.")
 			}
 		}
+
+		dummyDataAdmin(worldBank.nBank)
 		worldBank.Banks[worldBank.nBank].nCustomer = 0
 		worldBank.nBank++
 

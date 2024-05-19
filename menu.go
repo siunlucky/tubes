@@ -51,7 +51,7 @@ func mainMenuAdmin() {
 		for adminChoice >= 1 && adminChoice <= 5 {
 			switch adminChoice {
 			case 1:
-				insertDataBank(&worldBank)
+				insertDataCustomer(uniqueBankCode, &worldBank)
 			case 2:
 				viewDataCustomer(uniqueBankCode, worldBank)
 			case 3:

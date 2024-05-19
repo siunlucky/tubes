@@ -142,7 +142,7 @@ func insertDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 			if worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].PIN == "" {
 				fmt.Println("PIN field may not be empty.")
 			} else if len(worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].PIN) != 6 {
-				fmt.Println("PIN should be contain more than 3 char.")
+				fmt.Println("PIN should be contain 6  char.")
 			}
 		}
 
@@ -160,7 +160,7 @@ func insertDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 			if retry == "N" || retry == "n" {
 				startRetry = false
 				startInsertCustomer = false
-				mainMenuSuperAdmin()
+				mainMenuAdmin()
 			} else if retry == "Y" || retry == "y" {
 				startRetry = false
 				startInsertCustomer = true
