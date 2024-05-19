@@ -157,7 +157,7 @@ func editDataBank(worldBank *WorldBank) {
 					found = true
 				}
 			}
-			if bankIndex-1 < 0 || bankIndex-1 > worldBank.nBank {
+			if bankIndex-1 < 0 || bankIndex-1 > worldBank.nBank-1 {
 				fmt.Println("Bank Number is not available.")
 				fmt.Print("Input Bank Number (input -1 for cancel) : ")
 				fmt.Scan(&bankIndex)
@@ -348,7 +348,7 @@ func deleteDataBank(worldBank *WorldBank) {
 					found = true
 				}
 			}
-			if bankIndex-1 < 0 || bankIndex-1 > worldBank.nBank {
+			if bankIndex-1 < 0 || bankIndex-1 > worldBank.nBank-1 {
 				fmt.Println("Bank Number is not available.")
 				fmt.Print("Input Bank Number (input -1 for cancel) : ")
 				fmt.Scan(&bankIndex)
@@ -356,10 +356,11 @@ func deleteDataBank(worldBank *WorldBank) {
 		}
 
 		if bankIndex != -1 {
-			for i := bankIndex - 1; i < worldBank.nBank-1; i++ {
+			for i := bankIndex - 1; i < worldBank.nBank; i++ {
 				worldBank.Banks[i] = worldBank.Banks[i+1]
 			}
 			worldBank.nBank--
+
 			fmt.Println("Bank Data Deleted Successfully")
 			mainMenuSuperAdmin()
 			fmt.Println()

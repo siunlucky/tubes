@@ -36,6 +36,8 @@ func viewDataCustomer(uniqueBankCode int, worldBank WorldBank) {
 
 	var bankIdx int = searchBankByUniqueCode(uniqueBankCode)
 
+	var address string
+
 	if bankIdx == -1 {
 		fmt.Println("Bank not found.")
 		return
@@ -49,11 +51,12 @@ func viewDataCustomer(uniqueBankCode int, worldBank WorldBank) {
 		} else {
 			fmt.Println()
 			fmt.Println("Customer Data :")
-			fmt.Printf("%-5s %-20s %-20s %-20s %-20s %-20s %-20s %20s\n", "Account Number", "Card Number", "PIN", "NIK", "Name", "Address", "Balance", "Is Suspended")
+			fmt.Printf("%-5s %-20s %-20s %-20s %-20s %-20s %-20s %-20s %20s\n", "No", "Account Number", "Card Number", "PIN", "NIK", "Name", "Address", "Balance", "Is Suspended")
 			for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
-				fmt.Printf("%-5d %-20d %-20d %-20d %-20s %-20s%s %s %-20d %20b\n", worldBank.Banks[bankIdx].customers[i].accountNumber, worldBank.Banks[bankIdx].customers[i].cardNumber, worldBank.Banks[bankIdx].customers[i].PIN, worldBank.Banks[bankIdx].customers[i].NIK, worldBank.Banks[bankIdx].customers[i].name, worldBank.Banks[bankIdx].customers[i].address.district, worldBank.Banks[bankIdx].customers[i].address.city, worldBank.Banks[bankIdx].customers[i].address.province, worldBank.Banks[bankIdx].customers[i].balance, worldBank.Banks[bankIdx].customers[i].isSuspended)
+				address = worldBank.Banks[bankIdx].customers[i].address.district + ", " + worldBank.Banks[bankIdx].customers[i].address.city + ", " + worldBank.Banks[bankIdx].customers[i].address.province
+				fmt.Printf("%-5d %-20d %-20d %-20s %-20d %-20s %-20s %-20d %20t\n", i+1, worldBank.Banks[bankIdx].customers[i].accountNumber, worldBank.Banks[bankIdx].customers[i].cardNumber, worldBank.Banks[bankIdx].customers[i].PIN, worldBank.Banks[bankIdx].customers[i].NIK, worldBank.Banks[bankIdx].customers[i].name, address, worldBank.Banks[bankIdx].customers[i].balance, worldBank.Banks[bankIdx].customers[i].isSuspended)
 			}
-			fmt.Println("Total Data : ", worldBank.Banks[bankIdx].nCustomer)
+			fmt.Println("Total Data :", worldBank.Banks[bankIdx].nCustomer)
 			startViewCustomer = false
 			adminChoice = 0
 		}
@@ -104,7 +107,7 @@ func insertDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 			}
 		}
 
-		fmt.Println("Address :")
+		fmt.Println("\nAddress")
 
 		for worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].address.district == "" || len(worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].address.district) < 3 {
 			fmt.Print("District : ")
@@ -149,6 +152,17 @@ func insertDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 		worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].isSuspended = false
 		worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].balance = 0
 		worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].nTransaction = 0
+		worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].cardNumber = codeGenerator(1000000000000000, 9999999999999999)
+		worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].accountNumber = codeGenerator(10000000, 99999999)
+		for searchCustomerByAccountNumber(bankIdx, worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].accountNumber) != -1 || searchCustomerByCardNumber(bankIdx, worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].cardNumber) != -1 {
+			if searchCustomerByAccountNumber(bankIdx, worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].accountNumber) != -1 {
+				worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].accountNumber = codeGenerator(10000000, 99999999)
+			}
+
+			if searchCustomerByCardNumber(bankIdx, worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].cardNumber) != -1 {
+				worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].cardNumber = codeGenerator(1000000000000000, 9999999999999999)
+			}
+		}
 		worldBank.Banks[bankIdx].nCustomer++
 
 		fmt.Println("Customer Data Created Successfully")
@@ -169,6 +183,26 @@ func insertDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 				fmt.Scan(&retry)
 			}
 		}
+	}
+}
+
+func deleteDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
+	var customerIndex int
+	// var found bool
+
+	var bankIdx int = searchBankByUniqueCode(uniqueBankCode)
+
+	if worldBank.Banks[bankIdx].nCustomer == 0 {
+		fmt.Println("There is no data to be deleted.")
+		mainMenuAdmin()
+	}
+
+	for customerIndex != -1 {
+		viewDataCustomer(bankIdx, *worldBank)
+
+		fmt.Print("Input Customer Number (input -1 for cancel) : ")
+		fmt.Scan(&customerIndex)
+
 	}
 }
 
