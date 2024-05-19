@@ -34,18 +34,34 @@ var SuperAdmin = Credential{
 	password: "1",
 }
 
+// type Customer struct {
+// 	accountNumber int
+// 	balance       int
+// 	transactions  []Transaction
+// 	nTransaction  int
+// 	cardNumber    int
+// 	PIN           string
+// 	NIK           int
+// 	name          string
+// 	address       Address
+// 	isSuspended   bool
+// }
+
 type Customer struct {
-	accountNumber int
-	balance       int
-	transactions  []Transaction
-	nTransaction  int
-	cardNumber    int
-	PIN           string
-	NIK           int
-	name          string
-	address       Address
-	isSuspended   bool
+    accountNumber int
+    balance       int
+    transactions  []Transaction
+    nTransaction  int
+    cardNumber    int
+    PIN           string
+    NIK           int
+    name          string
+    address       Address
+    bankCode      int
+    branchAddress Address
+    isSuspended   bool
 }
+
 
 type CustomerBank struct {
 	customers [NMAX]Customer

@@ -80,7 +80,7 @@ func mainMenuCustomer() {
 		if choice == 1 {
 			loginCustomer()
 		} else {
-			fmt.Println("Input is not valid, please try again")
+			fmt.Println("Input is not valid, please with right option")
 			fmt.Println()
 		}
 	}
@@ -94,7 +94,8 @@ func customerMenu(customer *Customer) {
 		fmt.Println("=             Customer Menu            =")
 		fmt.Println("1. View Balance")
 		fmt.Println("2. Transfer")
-		fmt.Println("3. Logout")
+		fmt.Println("3. Top-up Saldo")
+		fmt.Println("4. Logout")
 		fmt.Print("Choose the menu option with number : ")
 
 		var choice int
@@ -106,9 +107,11 @@ func customerMenu(customer *Customer) {
 		case 2:
 			transfer(customer)
 		case 3:
+			topUpSaldo(customer)
+		case 4:
 			startCustomerMenu = false
 		default:
-			fmt.Println("Pilihan tidak valid.")
+			fmt.Println("Input is not valid, please input with right option")
 		}
 	}
 }
