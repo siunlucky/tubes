@@ -2,34 +2,6 @@ package main
 
 import "fmt"
 
-// register function to register as customer
-func register() {
-	if customerBank.nCustomer >= NMAX {
-		fmt.Println("Customer bank is full, unable to register new customer.")
-		return
-	}
-
-	var customer Customer
-	fmt.Print("Masukkan nomor rekening: ")
-	fmt.Scan(&customer.accountNumber)
-	fmt.Print("Masukkan saldo awal: ")
-	fmt.Scan(&customer.balance)
-	fmt.Print("Masukkan nomor kartu: ")
-	fmt.Scan(&customer.cardNumber)
-	fmt.Print("Masukkan PIN: ")
-	fmt.Scan(&customer.PIN)
-	fmt.Print("Masukkan NIK: ")
-	fmt.Scan(&customer.NIK)
-	fmt.Print("Masukkan nama: ")
-	fmt.Scan(&customer.name)
-	fmt.Print("Masukkan alamat (district, city, province): ")
-	fmt.Scan(&customer.address.district, &customer.address.city, &customer.address.province)
-
-	customerBank.customers[customerBank.nCustomer] = customer
-	customerBank.nCustomer++
-
-	fmt.Println("Registrasi berhasil.")
-}
 
 func viewDataCustomer(uniqueBankCode int, worldBank WorldBank) {
 	var startViewCustomer bool = true
@@ -174,7 +146,7 @@ func insertDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 
 func topUpSaldo(customer *Customer) {
 	var amount int
-	fmt.Print("The minimum top-up amount is Rp 50.000. Input the amount you want to top-up: Rp ")
+	fmt.Print("The minimum top-up amount is Rp 50.000. Input the amount you want to top-up: Rp.")
 	fmt.Scan(&amount)
 
 	if amount < 50000 {
@@ -183,5 +155,5 @@ func topUpSaldo(customer *Customer) {
 	}
 
 	customer.balance += amount
-	fmt.Printf("Top-up success, now your balance is Rp %d\n", customer.balance)
+	fmt.Printf("Top-up success, now your balance is Rp.%d\n", customer.balance)
 }
