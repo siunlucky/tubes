@@ -149,9 +149,7 @@ func isSuperAdmin(credential Credential) bool {
 
 // isAdmin function to check the credential
 func isAdmin(uniqueBankCode int, credential Credential) bool {
-	var idx int
-
-	idx = searchBankByUniqueCode(uniqueBankCode)
+	var idx int = searchBankByUniqueCode(uniqueBankCode)
 
 	if idx == -1 {
 		return false
