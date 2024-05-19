@@ -95,7 +95,8 @@ func customerMenu(customer *Customer) {
 		fmt.Println("1. View Balance")
 		fmt.Println("2. Transfer")
 		fmt.Println("3. Top-up Saldo")
-		fmt.Println("4. Logout")
+		fmt.Println("4. Payment")
+		fmt.Println("5. Logout")
 		fmt.Print("Choose the menu option with number : ")
 
 		var choice int
@@ -109,6 +110,8 @@ func customerMenu(customer *Customer) {
 		case 3:
 			topUpSaldo(customer)
 		case 4:
+			payment(customer)
+		case 5:
 			startCustomerMenu = false
 		default:
 			fmt.Println("Input is not valid, please input with right option")

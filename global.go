@@ -69,3 +69,14 @@ type Address struct {
 	city     string
 	province string
 }
+
+type Bill struct {
+	description string
+	amount      int
+	isPaid      bool
+}
+
+var bills = []Bill{
+	{description: "Electricity Bill", amount: 120000, isPaid: false},
+	{description: "HUTANG Payment", amount: 500000, isPaid: false},
+}
