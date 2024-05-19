@@ -171,3 +171,17 @@ func insertDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 		}
 	}
 }
+
+func topUpSaldo(customer *Customer) {
+	var amount int
+	fmt.Print("The minimum top-up amount is Rp 50.000. Input the amount you want to top-up: Rp ")
+	fmt.Scan(&amount)
+
+	if amount < 50000 {
+		fmt.Println("Amount is less than the minimum top-up amount, please input more than Rp 50.000.")
+		return
+	}
+
+	customer.balance += amount
+	fmt.Printf("Top-up success, now your balance is Rp %d\n", customer.balance)
+}
