@@ -17,8 +17,6 @@ func loginSuperAdmin() {
 	fmt.Scan(&credential.username)
 	fmt.Print("Please Input Password : ")
 	fmt.Scan(&credential.password)
-	// coba cek iz, ini mending or apa and, gua bikin sendiri, tapi ambigu sendiri wkwk
-	// Udah bener kok jadi ketika dia gagal login sama attempt kurang dari 4 dia bakal bakalan ngulang lagi -faiz
 	for !isSuperAdmin(credential) && maxTrial < 4 {
 		loading("Checking Credentials")
 		maxTrial++
@@ -58,8 +56,6 @@ func loginAdmin() {
 	fmt.Scan(&credential.username)
 	fmt.Print("Please Input Password : ")
 	fmt.Scan(&credential.password)
-	// coba cek iz, ini mending or apa and, gua bikin sendiri, tapi ambigu sendiri wkwk
-	// Udah bener kok jadi ketika dia gagal login sama attempt kurang dari 4 dia bakal bakalan ngulang lagi -faiz
 	for !isAdmin(uniqueBankCode, credential) && maxTrial < 4 {
 		loading("Checking Credentials")
 		maxTrial++
