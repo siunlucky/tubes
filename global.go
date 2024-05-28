@@ -3,6 +3,7 @@ package main
 const NMAX = 1000
 const NMAX_Bank = 10
 const NMAX_Admin = 10
+const MAX_BALANCE = 1000000000
 
 type Bank struct {
 	name       string
@@ -70,13 +71,14 @@ type Address struct {
 	province string
 }
 
+const NMAX_Bills = 10
+
 type Bill struct {
-	description string
-	amount      int
-	isPaid      bool
+    description string
+    amount      int
+    isPaid      bool
 }
 
-var bills = []Bill{
-	{description: "Electrict Bill", amount: 120000, isPaid: false},
-	{description: "HUTANG Bill", amount: 500000, isPaid: false},
-}
+var bills [NMAX_Bills]Bill
+
+var nBills int

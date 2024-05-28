@@ -74,6 +74,7 @@ func mainMenuCustomer() {
 		fmt.Println("=             Menu Customer            =")
 		fmt.Println("========================================")
 		fmt.Println("1. Login")
+		fmt.Println("2. Back to main menu")
 		fmt.Print("Choose the menu option with number : ")
 
 		var choice int
@@ -81,16 +82,22 @@ func mainMenuCustomer() {
 
 		if choice == 1 {
 			loginCustomer()
+		} else if choice == 2 {
+			break
 		} else {
-			fmt.Println("Input is not valid, please with right option")
-			fmt.Println()
+			fmt.Println("Input is not valid, please input with right option")
+		}
+
+		if choice == 2 {
+			break
 		}
 	}
 }
 
 func customerMenu(customer *Customer) {
-	var startCustomerMenu bool = true
-	for startCustomerMenu {
+	dummyBills()
+
+	for {
 		fmt.Println()
 		fmt.Println("========================================")
 		fmt.Println("=             Customer Menu            =")
@@ -99,7 +106,7 @@ func customerMenu(customer *Customer) {
 		fmt.Println("3. Top-up Saldo")
 		fmt.Println("4. Payment")
 		fmt.Println("5. Logout")
-		fmt.Print("Choose the menu option with number : ")
+		fmt.Print("Choose the menu option with number: ")
 
 		var choice int
 		fmt.Scan(&choice)
@@ -114,9 +121,13 @@ func customerMenu(customer *Customer) {
 		case 4:
 			payment(customer)
 		case 5:
-			startCustomerMenu = false
+			fmt.Println("Logging out...")
+			break
 		default:
 			fmt.Println("Input is not valid, please input with right option")
+		}
+		if choice == 5 {
+			break
 		}
 	}
 }
