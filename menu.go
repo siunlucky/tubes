@@ -35,20 +35,19 @@ func mainMenuSuperAdmin() {
 	}
 }
 
-
 var adminChoice int
 
 func mainMenuAdmin() {
-	fmt.Println("\n========================================")
-	fmt.Println("=              Menu Admin              =")
-	fmt.Println("========================================")
-	fmt.Println("1. Insert Customer Data")
-	fmt.Println("2. View Customer Data")
-	fmt.Println("3. Edit Customer Data")
-	fmt.Println("4. Delete Customer")
-	fmt.Println("5. Logout")
-	fmt.Print("Input : ")
 	for {
+		fmt.Println("\n========================================")
+		fmt.Println("=              Menu Admin              =")
+		fmt.Println("========================================")
+		fmt.Println("1. Insert Customer Data")
+		fmt.Println("2. View Customer Data")
+		fmt.Println("3. Edit Customer Data")
+		fmt.Println("4. Delete Customer")
+		fmt.Println("5. Logout")
+		fmt.Print("Input : ")
 		fmt.Scan(&adminChoice)
 		if adminChoice == 1 {
 			insertDataCustomer(uniqueBankCode, &worldBank)
