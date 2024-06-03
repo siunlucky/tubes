@@ -68,7 +68,6 @@ func mainMenuAdmin() {
 }
 
 func mainMenuCustomer() {
-	dummyData()
 	for {
 		fmt.Println("========================================")
 		fmt.Println("=             Menu Customer            =")
