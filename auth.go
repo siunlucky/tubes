@@ -68,6 +68,8 @@ func loginAdmin() {
 		}
 
 		fmt.Print("Login failed please try again\n")
+		fmt.Print("Please Input Unique Bank Code : ")
+		fmt.Scan(&uniqueBankCode)
 		fmt.Print("Please Input Username : ")
 		fmt.Scan(&credential.username)
 		fmt.Print("Please Input Password : ")
