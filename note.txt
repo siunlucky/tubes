@@ -1,11 +1,11 @@
 UPDATE :
-1) BUAT FITUR HANDLE CEK APAKAH BANKCODE ADA? LALU BARU CEK APAKAH USERNAME DAN PASSWORD NYA ADA, DI FUNCTION viewDataCustomer, UNTUK IMPLEMENTASI DI MENU DATA ADMIN
+1) BUAT FITUR HANDLE CEK APAKAH BANKCODE ADA? LALU BARU CEK APAKAH USERNAME DAN PASSWORD NYA ADA, DI FUNCTION viewDataCustomer, UNTUK IMPLEMENTASI DI MENU DATA ADMIN DONEE
 
 2) HANDLE BACK TO MAIN MENU IN viewDataCustomer DONEE
 
-3) Implementasi shorting selection dan insertion di viewDataCustomer admin bank, viewDataBank worldbank INI GUA (PROSES)
+3) Implementasi shorting selection dan insertion berdasarkan urutan balance di viewDataCustomer admin bank, viewDataBank worldbank INI GUA (PROSES)
 
-4) Implementasi searching Sequential dan Binary Searchketika mencari data di function deleteDataBank, editDataBank di world bank, lalu di editDataCustomer dan deleteDataCustomer admin bank
+4) Implementasi searching Sequential dan Binary Search ketika mencari data di function deleteDataBank, editDataBank di world bank, lalu di editDataCustomer dan deleteDataCustomer admin bank
 
 5) Bikin bisa cek riwayat transaksi transfer disetiap user, buat di admin bank INI GUA (PROSES)
 

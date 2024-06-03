@@ -4,6 +4,7 @@ const NMAX = 1000
 const NMAX_Bank = 10
 const NMAX_Admin = 10
 const MAX_BALANCE = 1000000000
+const NMAX_Transactions = 100
 
 
 var worldBank WorldBank
@@ -39,17 +40,17 @@ var SuperAdmin = Credential{
 }
 
 type Customer struct {
-    accountNumber int
-    balance       int
-    transactions  []Transaction
-    nTransaction  int
-    cardNumber    int
-    PIN           string
-    NIK           int
-    name          string
-    address       Address
-    bankCode      int
-    branchAddress Address
+	accountNumber int
+	balance       int
+	transactions  [NMAX_Transactions]Transaction
+	nTransaction  int
+	cardNumber    int
+	PIN           string
+	NIK           int
+	name          string
+	address       Address
+	bankCode      int
+	branchAddress Address
 }
 
 type CustomerBank struct {
