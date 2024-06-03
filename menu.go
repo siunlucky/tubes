@@ -1,15 +1,10 @@
 package main
 
-import (
-	"fmt"
-	// "reflect"
-)
-
-var superAdminStart bool = true
-var superAdminChoice int
+import "fmt"
 
 func mainMenuSuperAdmin() {
-	for superAdminStart {
+	var superAdminChoice int
+	for {
 		fmt.Println("\nSuper Admin Menu")
 		fmt.Println("1. Insert Bank Data")
 		fmt.Println("2. View Bank Data")
@@ -18,19 +13,18 @@ func mainMenuSuperAdmin() {
 		fmt.Println("5. Logout")
 		fmt.Print("Input : ")
 		fmt.Scan(&superAdminChoice)
-		for superAdminChoice >= 1 && superAdminChoice <= 5 {
-			switch superAdminChoice {
-			case 1:
-				insertDataBank(&worldBank)
-			case 2:
-				viewDataBank(worldBank)
-			case 3:
-				editDataBank(&worldBank)
-			case 4:
-				deleteDataBank(&worldBank)
-			case 5:
-				logoutSuperAdmin()
-			}
+		if superAdminChoice == 1 {
+			insertDataBank(&worldBank)
+		} else if superAdminChoice == 2 {
+			viewDataBank(worldBank)
+		} else if superAdminChoice == 3 {
+			editDataBank(&worldBank)
+		} else if superAdminChoice == 4 {
+			deleteDataBank(&worldBank)
+		} else if superAdminChoice == 5 {
+			break
+		} else {
+			fmt.Println("Input is not valid, please input with right option")
 		}
 	}
 }
@@ -78,7 +72,7 @@ func mainMenuCustomer() {
 		fmt.Scan(&choice)
 
 		if choice == 1 {
-			loginCustomer()
+			loginCustomer(worldBank)
 		} else if choice == 2 {
 			break
 		} else {
@@ -118,7 +112,6 @@ func customerMenu(customer *Customer) {
 		case 4:
 			payment(customer)
 		case 5:
-			fmt.Println("Logging out...")
 			break
 		default:
 			fmt.Println("Input is not valid, please input with right option")

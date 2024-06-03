@@ -56,7 +56,6 @@ func transfer(customer *Customer) {
             customer.balance -= (amount + fee)
             recipient.balance += amount
 
-            // Record the transaction for the sender
             if customer.nTransaction < NMAX_Transactions {
                 customer.transactions[customer.nTransaction] = Transaction{
                     transactionId:          getNewTransactionId(),
@@ -71,7 +70,6 @@ func transfer(customer *Customer) {
                 fmt.Println("Sender transaction history is full.")
             }
 
-            // Record the transaction for the recipient
             if recipient.nTransaction < NMAX_Transactions {
                 recipient.transactions[recipient.nTransaction] = Transaction{
                     transactionId:          getNewTransactionId(),

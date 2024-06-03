@@ -22,8 +22,20 @@ func viewDataCustomer(uniqueBankCode int, worldBank WorldBank) {
 			fmt.Println("Customer Data:")
 			fmt.Printf("%-5s %-20s %-20s %-20s %-20s %-20s %-20s %-20s\n", "No", "Account Number", "Card Number", "PIN", "NIK", "Name", "Address", "Balance")
 			for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
-				address = worldBank.Banks[bankIdx].customers[i].address.district + ", " + worldBank.Banks[bankIdx].customers[i].address.city + ", " + worldBank.Banks[bankIdx].customers[i].address.province
-				fmt.Printf("%-5d %-20d %-20d %-20s %-20d %-20s %-20s %-20d\n", i+1, worldBank.Banks[bankIdx].customers[i].accountNumber, worldBank.Banks[bankIdx].customers[i].cardNumber, worldBank.Banks[bankIdx].customers[i].PIN, worldBank.Banks[bankIdx].customers[i].NIK, worldBank.Banks[bankIdx].customers[i].name, address, worldBank.Banks[bankIdx].customers[i].balance)
+				customer := worldBank.Banks[bankIdx].customers[i]
+				address = customer.address.district + ", " + customer.address.city + ", " + customer.address.province
+				fmt.Printf("%-5d %-20d %-20d %-20s %-20d %-20s %-20s %-20d\n", i+1, customer.accountNumber, customer.cardNumber, customer.PIN, customer.NIK, customer.name, address, customer.balance)
+
+				if customer.nTransaction > 0 {
+					fmt.Println("Transaction History:")
+					fmt.Printf("%-5s %-20s %-20s %-20s\n", "No", "Recipient Bank", "Recipient Account", "Amount")
+					for j := 0; j < customer.nTransaction; j++ {
+						tx := customer.transactions[j]
+						fmt.Printf("%-5d %-20d %-20d %-20d\n", j+1, tx.recipientBankCode, tx.recipientAccountNumber, tx.amount)
+					}
+				} else {
+					fmt.Println("Transaction History: None")
+				}
 			}
 			fmt.Println("Total Data:", worldBank.Banks[bankIdx].nCustomer)
 			startViewCustomer = false
@@ -33,7 +45,7 @@ func viewDataCustomer(uniqueBankCode int, worldBank WorldBank) {
 }
 
 func insertDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
-	var retry string = "y"
+	// var retry string = "y"
 	var found bool
 
 	var startInsertCustomer bool = true
@@ -131,26 +143,29 @@ func insertDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 				worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].cardNumber = codeGenerator(1000000000000000, 9999999999999999)
 			}
 		}
+
 		worldBank.Banks[bankIdx].nCustomer++
 
 		fmt.Println("Customer Data Created Successfully")
 
-		fmt.Println("\nWill Create Customer Data Again? (Y/N)")
-		fmt.Scan(&retry)
-		var startRetry bool = true
-		for startRetry {
-			if retry == "N" || retry == "n" {
-				startRetry = false
-				startInsertCustomer = false
-				mainMenuAdmin()
-			} else if retry == "Y" || retry == "y" {
-				startRetry = false
-				startInsertCustomer = true
-			} else {
-				fmt.Println("Please input the right option")
-				fmt.Scan(&retry)
-			}
-		}
+		startInsertCustomer = false
+
+		// fmt.Println("\nWill Create Customer Data Again? (Y/N)")
+		// fmt.Scan(&retry)
+		// var startRetry bool = true
+		// for startRetry {
+		// 	if retry == "N" || retry == "n" {
+		// 		startRetry = false
+		// 		startInsertCustomer = false
+		// 		mainMenuAdmin()
+		// 	} else if retry == "Y" || retry == "y" {
+		// 		startRetry = false
+		// 		startInsertCustomer = true
+		// 	} else {
+		// 		fmt.Println("Please input the right option")
+		// 		fmt.Scan(&retry)
+		// 	}
+		// }
 	}
 }
 
@@ -175,7 +190,7 @@ func editDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 			fmt.Scan(&customerIndex)
 		}
 
-		for choice != 5 && customerIndex != -1 {
+		for choice != 4 && customerIndex != -1 {
 			fmt.Println("1. Edit Name")
 			fmt.Println("2. Edit Address")
 			fmt.Println("3. Reset PIN")
@@ -291,7 +306,6 @@ func deleteDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 			worldBank.Banks[bankIdx].nCustomer--
 
 			fmt.Println("Customer Data Deleted Successfully")
-			mainMenuAdmin()
 			fmt.Println()
 		}
 	}

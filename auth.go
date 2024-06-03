@@ -37,6 +37,7 @@ func loginSuperAdmin() {
 	loading("Checking Credentials")
 
 	fmt.Println("Login Success!")
+	mainMenuSuperAdmin()
 }
 
 // loginAdmin function to login as admin
@@ -44,7 +45,7 @@ func loginSuperAdmin() {
 var uniqueBankCode int
 
 func loginAdmin() {
-	var credential Credential
+	// var credential Credential
 	var maxTrial int
 
 	maxTrial = 1
@@ -52,12 +53,11 @@ func loginAdmin() {
 	fmt.Println("--------------Login Menu--------------")
 	fmt.Print("Please Input Unique Bank Code : ")
 	fmt.Scan(&uniqueBankCode)
-	fmt.Print("Please Input Username : ")
-	fmt.Scan(&credential.username)
-	fmt.Print("Please Input Password : ")
-	fmt.Scan(&credential.password)
-	for !isAdmin(uniqueBankCode, credential) && maxTrial < 4 {
-		loading("Checking Credentials")
+	// fmt.Print("Please Input Username : ")
+	// fmt.Scan(&credential.username)
+	// fmt.Print("Please Input Password : ")
+	// fmt.Scan(&credential.password)
+	for !isAdmin(uniqueBankCode) && maxTrial < 4 {
 		maxTrial++
 		if maxTrial == 4 {
 			fmt.Println("-- SORRY, YOU HAVE REACH THE MAXIMUM TRIAL FOR 3 TIMES --")
@@ -70,43 +70,54 @@ func loginAdmin() {
 		fmt.Print("Login failed please try again\n")
 		fmt.Print("Please Input Unique Bank Code : ")
 		fmt.Scan(&uniqueBankCode)
-		fmt.Print("Please Input Username : ")
-		fmt.Scan(&credential.username)
-		fmt.Print("Please Input Password : ")
-		fmt.Scan(&credential.password)
+		// fmt.Print("Please Input Username : ")
+		// fmt.Scan(&credential.username)
+		// fmt.Print("Please Input Password : ")
+		// fmt.Scan(&credential.password)
 	}
-	loading("Checking Credentials")
 
 	fmt.Println("Login Success!")
+	mainMenuAdmin()
 }
 
 // login function to login as customer
-func loginCustomer() {
+func loginCustomer(uniqueBankCode int, worldBank WorldBank) {
 	var accountNumber int
 	var PIN string
+
 	for attempts := 0; attempts < 3; attempts++ {
 		fmt.Println()
 		fmt.Println("========================================")
 		fmt.Print("Input Account Number : ")
 		fmt.Scan(&accountNumber)
+		fmt.Print("Input Uniqode Bank : ")
+		fmt.Scan(&uniqueBankCode)
 		fmt.Print("Input PIN : ")
 		fmt.Scan(&PIN)
 
+		var bankIdx int = searchBankByUniqueCode(uniqueBankCode)
+
+		if bankIdx == -1 {
+			fmt.Println("Bank not found.")
+			return
+		}
+
 		// Sequential Search
-		for i := 0; i < customerBank.nCustomer; i++ {
-			if customerBank.customers[i].accountNumber == accountNumber && customerBank.customers[i].PIN == PIN {
-				loadingAuth("Checking Credentials")
+		fmt.Print(worldBank.Banks[bankIdx].nCustomer)
+		for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
+			if worldBank.Banks[bankIdx].customers[i].accountNumber == accountNumber && worldBank.Banks[bankIdx].customers[i].PIN == PIN {
+				// loadingAuth("Checking Credentials")
 				fmt.Println("Login Success!")
-				customerMenu(&customerBank.customers[i])
+				customerMenu(&worldBank.Banks[bankIdx].customers[i])
 				return
 			}
 		}
-		loadingAuth("Checking Credentials")
+		// loadingAuth("Checking Credentials")
 		fmt.Println("Your account number or PIN is incorrect")
 	}
 	fmt.Println()
-	fmt.Println("You have reached the maximum number for 3 attempts, wait for 1 minute.")
-	loadingFailLogin()
+	fmt.Println("You have reached the maximum number for 3 attempts, try again")
+	// loadingFailLogin()
 }
 
 // logoutSuperAdmin function to logout the super admin
@@ -172,18 +183,17 @@ func isSuperAdmin(credential Credential) bool {
 }
 
 // isAdmin function to check the credential
-func isAdmin(uniqueBankCode int, credential Credential) bool {
+func isAdmin(uniqueBankCode int) bool {
 	var idx int = searchBankByUniqueCode(uniqueBankCode)
-
 	if idx == -1 {
 		return false
 	}
 
-	for i := 0; i < worldBank.Banks[idx].nAdmin; i++ {
-		if credential.username == worldBank.Banks[idx].admins[i].username && credential.password == worldBank.Banks[idx].admins[i].password {
-			return true
-		}
-	}
+	// for i := 0; i < worldBank.Banks[idx].nAdmin; i++ {
+	// 	if credential.username == worldBank.Banks[idx].admins[i].username && credential.password == worldBank.Banks[idx].admins[i].password {
+	// 		return true
+	// 	}
+	// }
 
-	return false
+	return true
 }

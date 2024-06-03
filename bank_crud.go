@@ -4,7 +4,7 @@ import "fmt"
 
 // insertDataBank function to insert the bank data
 func insertDataBank(worldBank *WorldBank) {
-	var retry string = "y"
+	// var retry string = "y"
 	var found bool
 
 	var startInsertBank bool = true
@@ -23,8 +23,9 @@ func insertDataBank(worldBank *WorldBank) {
 			}
 		}
 
-		var retryBranch string
-		for retryBranch != "N" && retryBranch != "n" {
+		var bankJalan bool = true
+		// var retryBranch string
+		for bankJalan {
 			fmt.Println()
 			fmt.Println("Branch", worldBank.Banks[worldBank.nBank].nBranch+1)
 
@@ -61,11 +62,13 @@ func insertDataBank(worldBank *WorldBank) {
 			worldBank.Banks[worldBank.nBank].nBranch++
 			fmt.Println("Branch Data Created Successfully")
 
-			fmt.Println("\nWill You Create Branch Again? (Y/N)")
-			fmt.Scan(&retryBranch)
-			for retryBranch != "Y" && retryBranch != "N" && retryBranch != "y" && retryBranch != "n" {
-				fmt.Scan(&retryBranch)
-			}
+			bankJalan = false
+
+			// fmt.Println("\nWill You Create Branch Again? (Y/N)")
+			// fmt.Scan(&retryBranch)
+			// for retryBranch != "Y" && retryBranch != "N" && retryBranch != "y" && retryBranch != "n" {
+			// 	fmt.Scan(&retryBranch)
+			// }
 		}
 
 		for worldBank.Banks[worldBank.nBank].uniqueCode == 0 || worldBank.Banks[worldBank.nBank].uniqueCode < 100 || worldBank.Banks[worldBank.nBank].uniqueCode > 999 || found {
@@ -88,28 +91,29 @@ func insertDataBank(worldBank *WorldBank) {
 			}
 		}
 
-		dummyDataAdmin(worldBank.nBank)
+		// dummyDataAdmin(worldBank.nBank)
 		worldBank.Banks[worldBank.nBank].nCustomer = 0
 		worldBank.nBank++
 
 		fmt.Println("Bank Data Created Successfully")
 
-		fmt.Println("\nWill Create Bank Data Again? (Y/N)")
-		fmt.Scan(&retry)
-		var startRetry bool = true
-		for startRetry {
-			if retry == "N" || retry == "n" {
-				startRetry = false
-				startInsertBank = false
-				mainMenuSuperAdmin()
-			} else if retry == "Y" || retry == "y" {
-				startRetry = false
-				startInsertBank = true
-			} else {
-				fmt.Println("Please input the right option")
-				fmt.Scan(&retry)
-			}
-		}
+		startInsertBank = false
+
+		// fmt.Println("\nWill Create Bank Data Again? (Y/N)")
+		// fmt.Scan(&retry)
+		// // var startRetry bool = true
+		// for {
+		// 	if retry == "N" || retry == "n" {
+		// 		break
+		// 		mainMenuSuperAdmin()
+		// 	} else if retry == "Y" || retry == "y" {
+		// 		startRetry = false
+		// 		startInsertBank = true
+		// 	} else {
+		// 		fmt.Println("Please input the right option")
+		// 		fmt.Scan(&retry)
+		// 	}
+		// }
 	}
 }
 
@@ -121,7 +125,6 @@ func viewDataBank(worldBank WorldBank) {
 		if worldBank.nBank == 0 {
 			fmt.Println("There is no data to be viewed.")
 			startViewBank = false
-			superAdminChoice = 0
 		} else {
 			fmt.Println()
 			fmt.Println("Bank Data :")
@@ -131,7 +134,6 @@ func viewDataBank(worldBank WorldBank) {
 			}
 			fmt.Println("Total Data : ", worldBank.nBank)
 			startViewBank = false
-			superAdminChoice = 0
 		}
 	}
 }
@@ -328,6 +330,7 @@ func editDataBank(worldBank *WorldBank) {
 	}
 }
 
+// deleteDataBank function to delete the bank data
 func deleteDataBank(worldBank *WorldBank) {
 	var bankIndex int
 	var found bool
@@ -340,7 +343,7 @@ func deleteDataBank(worldBank *WorldBank) {
 	for bankIndex != -1 {
 		viewDataBank(*worldBank)
 
-		fmt.Print("Input Bank Number (input -1 for cancel) : ")
+		fmt.Print("Input Bank Number (input -1 for cancel) :")
 		fmt.Scan(&bankIndex)
 		for (bankIndex-1 < 0 || bankIndex-1 > worldBank.nBank || !found) && bankIndex != -1 {
 			for i := 0; i < worldBank.nBank && !found; i++ {
@@ -362,7 +365,6 @@ func deleteDataBank(worldBank *WorldBank) {
 			worldBank.nBank--
 
 			fmt.Println("Bank Data Deleted Successfully")
-			mainMenuSuperAdmin()
 			fmt.Println()
 		}
 	}

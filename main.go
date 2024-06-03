@@ -1,8 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 var startProgram bool = true
 
@@ -15,13 +13,14 @@ func main() {
 
 // main menu function to show the menu
 func menu() {
-	dummyData()
+	// dummyData()
 	var startMenu bool = true
 	var guestChoice int
 	fmt.Println("What user are u?")
 	fmt.Println("1. Super Admin")
 	fmt.Println("2. Bank Admin")
 	fmt.Println("3. Customer")
+	fmt.Println("4. Exit")
 
 	for startMenu {
 		fmt.Print("Input the option in number : ")
@@ -39,11 +38,11 @@ func menu() {
 	case 1:
 		clearTerminal()
 		loginSuperAdmin()
-		mainMenuSuperAdmin()
+		// mainMenuSuperAdmin()
 	case 2:
 		clearTerminal()
 		loginAdmin()
-		mainMenuAdmin()
+		// mainMenuAdmin()
 	case 3:
 		clearTerminal()
 		mainMenuCustomer()
