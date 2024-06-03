@@ -90,6 +90,7 @@ func loginCustomer() {
 		fmt.Print("Input PIN : ")
 		fmt.Scan(&PIN)
 
+		// Sequential Search
 		for i := 0; i < customerBank.nCustomer; i++ {
 			if customerBank.customers[i].accountNumber == accountNumber && customerBank.customers[i].PIN == PIN {
 				loadingAuth("Checking Credentials")

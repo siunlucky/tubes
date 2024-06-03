@@ -47,7 +47,6 @@ type Customer struct {
     address       Address
     bankCode      int
     branchAddress Address
-    isSuspended   bool
 }
 
 

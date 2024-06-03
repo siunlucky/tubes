@@ -35,34 +35,33 @@ func mainMenuSuperAdmin() {
 	}
 }
 
-var adminStart bool = true
+
 var adminChoice int
 
 func mainMenuAdmin() {
-	for adminStart {
-		fmt.Println("\n========================================")
-		fmt.Println("=              Menu Admin              =")
-		fmt.Println("========================================")
-		fmt.Println("1. Insert Customer Data")
-		fmt.Println("2. View Customer Data")
-		fmt.Println("3. Edit Customer Data")
-		fmt.Println("4. Delete Customer")
-		fmt.Println("5. Logout")
-		fmt.Print("Input : ")
+	fmt.Println("\n========================================")
+	fmt.Println("=              Menu Admin              =")
+	fmt.Println("========================================")
+	fmt.Println("1. Insert Customer Data")
+	fmt.Println("2. View Customer Data")
+	fmt.Println("3. Edit Customer Data")
+	fmt.Println("4. Delete Customer")
+	fmt.Println("5. Logout")
+	fmt.Print("Input : ")
+	for {
 		fmt.Scan(&adminChoice)
-		for adminChoice >= 1 && adminChoice <= 5 {
-			switch adminChoice {
-			case 1:
-				insertDataCustomer(uniqueBankCode, &worldBank)
-			case 2:
-				viewDataCustomer(uniqueBankCode, worldBank)
-			case 3:
-				editDataCustomer(uniqueBankCode, &worldBank)
-			case 4:
-				deleteDataCustomer(uniqueBankCode, &worldBank)
-			case 5:
-				logoutAdmin()
-			}
+		if adminChoice == 1 {
+			insertDataCustomer(uniqueBankCode, &worldBank)
+		} else if adminChoice == 2 {
+			viewDataCustomer(uniqueBankCode, worldBank)
+		} else if adminChoice == 3 {
+			editDataCustomer(uniqueBankCode, &worldBank)
+		} else if adminChoice == 4 {
+			deleteDataCustomer(uniqueBankCode, &worldBank)
+		} else if adminChoice == 5 {
+			break
+		} else {
+			fmt.Println("Input is not valid, please input with right option")
 		}
 	}
 }

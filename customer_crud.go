@@ -18,18 +18,18 @@ func viewDataCustomer(uniqueBankCode int, worldBank WorldBank) {
 		if worldBank.Banks[bankIdx].nCustomer == 0 {
 			fmt.Println("There is no data to be viewed.")
 			startViewCustomer = false
-			adminChoice = 0
+			adminChoice = 100
 		} else {
 			fmt.Println()
 			fmt.Println("Customer Data :")
-			fmt.Printf("%-5s %-20s %-20s %-20s %-20s %-20s %-20s %-20s %20s\n", "No", "Account Number", "Card Number", "PIN", "NIK", "Name", "Address", "Balance", "Is Suspended")
+			fmt.Printf("%-5s %-20s %-20s %-20s %-20s %-20s %-20s %-20s\n", "No", "Account Number", "Card Number", "PIN", "NIK", "Name", "Address", "Balance")
 			for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
 				address = worldBank.Banks[bankIdx].customers[i].address.district + ", " + worldBank.Banks[bankIdx].customers[i].address.city + ", " + worldBank.Banks[bankIdx].customers[i].address.province
-				fmt.Printf("%-5d %-20d %-20d %-20s %-20d %-20s %-20s %-20d %20t\n", i+1, worldBank.Banks[bankIdx].customers[i].accountNumber, worldBank.Banks[bankIdx].customers[i].cardNumber, worldBank.Banks[bankIdx].customers[i].PIN, worldBank.Banks[bankIdx].customers[i].NIK, worldBank.Banks[bankIdx].customers[i].name, address, worldBank.Banks[bankIdx].customers[i].balance, worldBank.Banks[bankIdx].customers[i].isSuspended)
+				fmt.Printf("%-5d %-20d %-20d %-20s %-20d %-20s %-20s %-20d\n", i+1, worldBank.Banks[bankIdx].customers[i].accountNumber, worldBank.Banks[bankIdx].customers[i].cardNumber, worldBank.Banks[bankIdx].customers[i].PIN, worldBank.Banks[bankIdx].customers[i].NIK, worldBank.Banks[bankIdx].customers[i].name, address, worldBank.Banks[bankIdx].customers[i].balance)
 			}
 			fmt.Println("Total Data :", worldBank.Banks[bankIdx].nCustomer)
 			startViewCustomer = false
-			adminChoice = 0
+			adminChoice = 100
 		}
 	}
 }
@@ -120,7 +120,6 @@ func insertDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 			}
 		}
 
-		worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].isSuspended = false
 		worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].balance = 0
 		worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].nTransaction = 0
 		worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].cardNumber = codeGenerator(1000000000000000, 9999999999999999)
@@ -181,9 +180,8 @@ func editDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 		for choice != 5 && customerIndex != -1 {
 			fmt.Println("1. Edit Name")
 			fmt.Println("2. Edit Address")
-			fmt.Println("3. Edit Suspended Status")
-			fmt.Println("4. Reset PIN")
-			fmt.Println("5. Save")
+			fmt.Println("3. Reset PIN")
+			fmt.Println("4. Save")
 			fmt.Print("Input : ")
 			fmt.Scan(&choice)
 			for choice < 1 || choice > 5 {
@@ -248,11 +246,6 @@ func editDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 				viewDataCustomer(uniqueBankCode, *worldBank)
 				fmt.Println()
 			case 3:
-				worldBank.Banks[bankIdx].customers[customerIndex-1].isSuspended = !worldBank.Banks[bankIdx].customers[customerIndex-1].isSuspended
-				fmt.Print("Customer Suspended Status Edited Successfully\n")
-				viewDataCustomer(uniqueBankCode, *worldBank)
-				fmt.Println()
-			case 4:
 				fmt.Print("New PIN : ")
 				fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].PIN)
 				for worldBank.Banks[bankIdx].customers[customerIndex-1].PIN == "" || len(worldBank.Banks[bankIdx].customers[customerIndex-1].PIN) != 6 {
@@ -307,21 +300,21 @@ func deleteDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 }
 
 func topUpSaldo(customer *Customer) {
-    var amount int
-    valid := false
+	var amount int
+	valid := false
 
-    for !valid {
-        fmt.Print("Input the amount you want to top-up: Rp.")
-        fmt.Scan(&amount)
+	for !valid {
+		fmt.Print("Input the amount you want to top-up: Rp.")
+		fmt.Scan(&amount)
 
-        if customer.balance + amount > MAX_BALANCE {
-            fmt.Printf("Cannot top-up. Maximum balance limit of Rp.%d will be exceeded\n", MAX_BALANCE)
-        } else if amount < 50000 {
+		if customer.balance+amount > MAX_BALANCE {
+			fmt.Printf("Cannot top-up. Maximum balance limit of Rp.%d will be exceeded\n", MAX_BALANCE)
+		} else if amount < 50000 {
 			fmt.Println("Amount is less than the minimum top-up amount, please input more than Rp 50.000")
-        } else {
-            customer.balance += amount
-            fmt.Printf("Top-up successful. New balance : Rp.%d\n", customer.balance)
-            valid = true
-        }
-    }
+		} else {
+			customer.balance += amount
+			fmt.Printf("Top-up successful. New balance : Rp.%d\n", customer.balance)
+			valid = true
+		}
+	}
 }
