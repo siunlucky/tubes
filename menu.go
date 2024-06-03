@@ -78,10 +78,6 @@ func mainMenuCustomer() {
 		} else {
 			fmt.Println("Input is not valid, please input with right option")
 		}
-
-		if choice == 2 {
-			break
-		}
 	}
 }
 

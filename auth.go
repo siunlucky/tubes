@@ -81,7 +81,7 @@ func loginAdmin() {
 }
 
 // login function to login as customer
-func loginCustomer(uniqueBankCode int, worldBank WorldBank) {
+func loginCustomer(worldBank WorldBank) {
 	var accountNumber int
 	var PIN string
 
@@ -103,7 +103,6 @@ func loginCustomer(uniqueBankCode int, worldBank WorldBank) {
 		}
 
 		// Sequential Search
-		fmt.Print(worldBank.Banks[bankIdx].nCustomer)
 		for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
 			if worldBank.Banks[bankIdx].customers[i].accountNumber == accountNumber && worldBank.Banks[bankIdx].customers[i].PIN == PIN {
 				// loadingAuth("Checking Credentials")
