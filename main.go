@@ -4,9 +4,6 @@ import (
 	"fmt"
 )
 
-var worldBank WorldBank
-var customerBank CustomerBank
-
 var startProgram bool = true
 
 func main() {

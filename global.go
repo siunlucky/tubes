@@ -5,6 +5,9 @@ const NMAX_Bank = 10
 const NMAX_Admin = 10
 const MAX_BALANCE = 1000000000
 
+
+var worldBank WorldBank
+
 type Bank struct {
 	name       string
 	branch     [NMAX_Bank]Address
@@ -49,11 +52,12 @@ type Customer struct {
     branchAddress Address
 }
 
-
 type CustomerBank struct {
 	customers [NMAX]Customer
 	nCustomer int
 }
+
+var customerBank CustomerBank
 
 type Transaction struct {
 	transactionId          int

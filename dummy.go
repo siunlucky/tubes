@@ -48,34 +48,8 @@ func dummyData() {
 	}
 
 	for i := 0; i < len(dummyCustomers); i++ {
-		if customerBank.nCustomer < NMAX {
-			customerBank.customers[customerBank.nCustomer] = dummyCustomers[i]
-			customerBank.nCustomer++
-		} else {
-			fmt.Println("Customer bank is full, unable to add more customers")
-			fmt.Println("Back to Main Menu")
-			loadingAuth("Loading")
-			fmt.Println()
-			menu()
-			return
-		}
+		addCustomerToBank(dummyCustomers[i])
 	}
-}
-
-func dummyBills() {
-    var bill1 Bill
-    bill1.description = "Electricity Bill"
-    bill1.amount = 120000
-    bill1.isPaid = false
-    bills[0] = bill1
-
-    var bill2 Bill
-    bill2.description = "Hutang Bill"
-    bill2.amount = 500000
-    bill2.isPaid = false
-    bills[1] = bill2
-
-    nBills = 2
 }
 
 func dummyDataAdmin(idx int) {
@@ -103,4 +77,38 @@ func dummyDataAdmin(idx int) {
 			menu()
 		}
 	}
+}
+
+func addCustomerToBank(customer Customer) {
+	for i := 0; i < worldBank.nBank; i++ {
+		if worldBank.Banks[i].uniqueCode == customer.bankCode {
+			if worldBank.Banks[i].nCustomer < NMAX {
+				worldBank.Banks[i].customers[worldBank.Banks[i].nCustomer] = customer
+				worldBank.Banks[i].nCustomer++
+			} else {
+				fmt.Println("Customer bank is full, unable to add more customers")
+				fmt.Println("Back to Main Menu")
+				loadingAuth("Loading")
+				fmt.Println()
+				menu()
+			}
+			return
+		}
+	}
+}
+
+func dummyBills() {
+    var bill1 Bill
+    bill1.description = "Electricity Bill"
+    bill1.amount = 120000
+    bill1.isPaid = false
+    bills[0] = bill1
+
+    var bill2 Bill
+    bill2.description = "Hutang Bill"
+    bill2.amount = 500000
+    bill2.isPaid = false
+    bills[1] = bill2
+
+    nBills = 2
 }

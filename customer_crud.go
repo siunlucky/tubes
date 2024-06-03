@@ -4,9 +4,7 @@ import "fmt"
 
 func viewDataCustomer(uniqueBankCode int, worldBank WorldBank) {
 	var startViewCustomer bool = true
-
 	var bankIdx int = searchBankByUniqueCode(uniqueBankCode)
-
 	var address string
 
 	if bankIdx == -1 {
@@ -21,13 +19,13 @@ func viewDataCustomer(uniqueBankCode int, worldBank WorldBank) {
 			adminChoice = 100
 		} else {
 			fmt.Println()
-			fmt.Println("Customer Data :")
+			fmt.Println("Customer Data:")
 			fmt.Printf("%-5s %-20s %-20s %-20s %-20s %-20s %-20s %-20s\n", "No", "Account Number", "Card Number", "PIN", "NIK", "Name", "Address", "Balance")
 			for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
 				address = worldBank.Banks[bankIdx].customers[i].address.district + ", " + worldBank.Banks[bankIdx].customers[i].address.city + ", " + worldBank.Banks[bankIdx].customers[i].address.province
 				fmt.Printf("%-5d %-20d %-20d %-20s %-20d %-20s %-20s %-20d\n", i+1, worldBank.Banks[bankIdx].customers[i].accountNumber, worldBank.Banks[bankIdx].customers[i].cardNumber, worldBank.Banks[bankIdx].customers[i].PIN, worldBank.Banks[bankIdx].customers[i].NIK, worldBank.Banks[bankIdx].customers[i].name, address, worldBank.Banks[bankIdx].customers[i].balance)
 			}
-			fmt.Println("Total Data :", worldBank.Banks[bankIdx].nCustomer)
+			fmt.Println("Total Data:", worldBank.Banks[bankIdx].nCustomer)
 			startViewCustomer = false
 			adminChoice = 100
 		}
