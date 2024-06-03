@@ -1,12 +1,10 @@
 package main
 
 func searchBankByUniqueCode(search int) int {
-	// Binary Search sorted by func sortBankByUniqueCode
 	var left, right, mid int
 
-	sortBankByUniqueCode(&worldBank, "asc")
+	sortBankByUniqueCode(&worldBank, "selection", "asc")
 
-	// Binary Search
 	left = 0
 	right = worldBank.nBank - 1
 	for left <= right {
