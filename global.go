@@ -6,7 +6,6 @@ const NMAX_Admin = 10
 const MAX_BALANCE = 1000000000
 const NMAX_Transactions = 100
 
-
 var worldBank WorldBank
 
 type Bank struct {
@@ -78,9 +77,9 @@ type Address struct {
 const NMAX_Bills = 10
 
 type Bill struct {
-    description string
-    amount      int
-    isPaid      bool
+	description string
+	amount      int
+	isPaid      bool
 }
 
 var bills [NMAX_Bills]Bill

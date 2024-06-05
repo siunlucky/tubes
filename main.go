@@ -5,6 +5,7 @@ import "fmt"
 var startProgram bool = true
 
 func main() {
+	dummyData(5)
 	loading("Starting Program")
 	for startProgram {
 		menu()
@@ -13,7 +14,6 @@ func main() {
 
 // main menu function to show the menu
 func menu() {
-	// dummyData()
 	var startMenu bool = true
 	var guestChoice int
 	fmt.Println("What user are u?")

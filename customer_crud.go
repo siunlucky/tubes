@@ -20,11 +20,11 @@ func viewDataCustomer(uniqueBankCode int, worldBank WorldBank) {
 		} else {
 			fmt.Println()
 			fmt.Println("Customer Data:")
-			fmt.Printf("%-5s %-20s %-20s %-20s %-20s %-20s %-20s %-20s\n", "No", "Account Number", "Card Number", "PIN", "NIK", "Name", "Address", "Balance")
+			fmt.Printf("%-5s %-20s %-20s %-10s %-20s %-20s %-30s %-20s\n", "No", "Account Number", "Card Number", "PIN", "NIK", "Name", "Address", "Balance")
 			for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
 				customer := worldBank.Banks[bankIdx].customers[i]
 				address = customer.address.district + ", " + customer.address.city + ", " + customer.address.province
-				fmt.Printf("%-5d %-20d %-20d %-20s %-20d %-20s %-20s %-20d\n", i+1, customer.accountNumber, customer.cardNumber, customer.PIN, customer.NIK, customer.name, address, customer.balance)
+				fmt.Printf("%-5d %-20d %-20d %-10s %-20d %-20s %-30s Rp. %-20d\n", i+1, customer.accountNumber, customer.cardNumber, customer.PIN, customer.NIK, customer.name, address, customer.balance)
 
 				if customer.nTransaction > 0 {
 					fmt.Println("Transaction History:")
@@ -36,8 +36,9 @@ func viewDataCustomer(uniqueBankCode int, worldBank WorldBank) {
 				} else {
 					fmt.Println("Transaction History: None")
 				}
+				fmt.Println()
 			}
-			fmt.Println("Total Data:", worldBank.Banks[bankIdx].nCustomer)
+			fmt.Println("\nTotal Data:", worldBank.Banks[bankIdx].nCustomer)
 			startViewCustomer = false
 			adminChoice = 100
 		}

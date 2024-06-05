@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func viewSaldo(customer *Customer) {
-    fmt.Printf("Balance in your account is: Rp.%d\n", customer.balance)
+	fmt.Printf("Balance in your account is: Rp.%d\n", customer.balance)
 }
 
 var transactionCounter int
@@ -14,134 +14,142 @@ func getNewTransactionId() int {
 }
 
 func transfer(customer *Customer) {
-	var recipientAccountNumber, amount int
-	var recipient *Customer
-	found := false
+	var recipientAccountNumber, amount, recipientIdx int
+	var input int
 
-	for !found {
-		fmt.Print("Input the recipient account number: ")
-		fmt.Scan(&recipientAccountNumber)
+	for {
+		fmt.Println()
+		fmt.Println("========================================")
+		fmt.Println("=               Transfer               =")
+		fmt.Println("1. Account Number")
+		fmt.Println("2. Another Bank")
+		fmt.Println("3. Back to main menu")
+		fmt.Print("Choose the menu option with number: ")
+		fmt.Scan(&input)
 
-		if recipientAccountNumber == customer.accountNumber {
-			fmt.Println("You cannot transfer to your own account, please input a different account number")
-		} else {
-			for i := 0; i < customerBank.nCustomer; i++ {
-				if customerBank.customers[i].accountNumber == recipientAccountNumber {
-					recipient = &customerBank.customers[i]
-					found = true
-					i = customerBank.nCustomer
+		if input == 1 {
+			var bankIdx int
+			fmt.Print("Input the recipient account number: ")
+			fmt.Scan(&recipientAccountNumber)
+			bankIdx = searchBankByUniqueCode(customer.bankCode)
+			recipientIdx = searchCustomerByAccountNumber(bankIdx, recipientAccountNumber)
+
+			for recipientIdx == -1 || recipientAccountNumber == customer.accountNumber {
+				fmt.Println("Recipient account number is not found, please try again")
+				fmt.Print("Input the recipient account number: ")
+				fmt.Scan(&recipientAccountNumber)
+				recipientIdx = searchCustomerByAccountNumber(bankIdx, recipientAccountNumber)
+			}
+
+			fmt.Print("Input the amount you want to transfer: Rp.")
+			fmt.Scan(&amount)
+
+			for amount < 50000 {
+				fmt.Println("The minimum amount to transfer is Rp.50000, please input the right amount")
+				fmt.Print("Input the amount you want to transfer: Rp.")
+				fmt.Scan(&amount)
+			}
+
+			if customer.balance < amount {
+				fmt.Println("Balance is not enough to transfer")
+			} else {
+				processTransfer(customer, bankIdx, recipientIdx, amount, false)
+				fmt.Println("Transfer success")
+			}
+		} else if input == 2 {
+			var bankIdx, j int
+			j = 0
+			fmt.Println("========================================")
+			fmt.Println("=            Select Bank               =")
+			for i := 0; i < worldBank.nBank; i++ {
+				if worldBank.Banks[i].uniqueCode != customer.bankCode {
+					fmt.Printf("%d. %s (%d)\n", j+1, worldBank.Banks[i].name, worldBank.Banks[i].uniqueCode)
+					j++
+				}
+			}
+			fmt.Print("Choose the bank option with number: ")
+			fmt.Scan(&bankIdx)
+			for bankIdx < 1 || bankIdx > worldBank.nBank-1 {
+				fmt.Println("Invalid bank choice, please choose the right number")
+				fmt.Print("Choose the bank option with number : ")
+				fmt.Scan(&bankIdx)
+			}
+
+			// Adjust bank index for proper selection
+			for i := 0; i < worldBank.nBank; i++ {
+				if worldBank.Banks[i].uniqueCode != customer.bankCode {
+					bankIdx--
+					if bankIdx == 0 {
+						bankIdx = i
+						break
+					}
 				}
 			}
 
-			if !found {
+			fmt.Print("Input the recipient account number: ")
+			fmt.Scan(&recipientAccountNumber)
+			recipientIdx = searchCustomerByAccountNumber(bankIdx, recipientAccountNumber)
+
+			for recipientIdx == -1 {
 				fmt.Println("Recipient account number is not found, please try again")
+				fmt.Print("Input the recipient account number: ")
+				fmt.Scan(&recipientAccountNumber)
+				recipientIdx = searchCustomerByAccountNumber(bankIdx, recipientAccountNumber)
 			}
+
+			fmt.Print("Input the amount you want to transfer: Rp.")
+			fmt.Scan(&amount)
+
+			for amount < 50000 {
+				fmt.Println("The minimum amount to transfer is Rp.50000, please input the right amount")
+				fmt.Print("Input the amount you want to transfer: Rp.")
+				fmt.Scan(&amount)
+			}
+
+			if customer.balance < amount+5000 {
+				fmt.Println("Balance is not enough to transfer")
+			} else {
+				processTransfer(customer, bankIdx, recipientIdx, amount, true)
+				fmt.Println("Transfer success")
+			}
+
+		} else if input == 3 {
+			break
+		} else {
+			fmt.Println("Input is not valid, please input with right option")
 		}
 	}
-
-	fmt.Print("Input the amount you want to transfer: Rp.")
-	fmt.Scan(&amount)
-
-	if customer.balance < amount {
-        fmt.Println("Balance is not enough to transfer")
-    } else {
-        fee := 0
-        if customer.bankCode != recipient.bankCode {
-            fee = 5000
-        }
-
-        if customer.balance < amount+fee {
-            fmt.Println("Balance is not enough to cover the transfer amount and fee")
-        } else {
-            customer.balance -= (amount + fee)
-            recipient.balance += amount
-
-            if customer.nTransaction < NMAX_Transactions {
-                customer.transactions[customer.nTransaction] = Transaction{
-                    transactionId:          getNewTransactionId(),
-                    senderBankCode:         customer.bankCode,
-                    senderAccountNumber:    customer.accountNumber,
-                    recipientBankCode:      recipient.bankCode,
-                    recipientAccountNumber: recipient.accountNumber,
-                    amount:                 amount,
-                }
-                customer.nTransaction++
-            } else {
-                fmt.Println("Sender transaction history is full.")
-            }
-
-            if recipient.nTransaction < NMAX_Transactions {
-                recipient.transactions[recipient.nTransaction] = Transaction{
-                    transactionId:          getNewTransactionId(),
-                    senderBankCode:         customer.bankCode,
-                    senderAccountNumber:    customer.accountNumber,
-                    recipientBankCode:      recipient.bankCode,
-                    recipientAccountNumber: recipient.accountNumber,
-                    amount:                 amount,
-                }
-                recipient.nTransaction++
-            } else {
-                fmt.Println("Recipient transaction history is full.")
-            }
-
-            fmt.Println("Transfer success")
-        }
-    }
 }
 
-// func transfer(customer *Customer) {
-// 	var recipientAccountNumber, amount int
-// 	var recipient Customer
-// 	found := false
+func processTransfer(customer *Customer, bankIdx int, recipientIdx int, amount int, isDifferentBank bool) {
+	recipientBankCode := customer.bankCode
+	if isDifferentBank {
+		recipientBankCode = worldBank.Banks[bankIdx].uniqueCode
+		customer.balance -= 5000 // Transfer fee
+	}
+	customer.balance -= amount
 
-// 	for !found {
-// 		fmt.Print("Input the recipient account number: ")
-// 		fmt.Scan(&recipientAccountNumber)
+	customer.transactions[customer.nTransaction] = Transaction{
+		transactionId:          getNewTransactionId(),
+		senderBankCode:         customer.bankCode,
+		senderAccountNumber:    customer.accountNumber,
+		recipientBankCode:      recipientBankCode,
+		recipientAccountNumber: worldBank.Banks[bankIdx].customers[recipientIdx].accountNumber,
+		amount:                 amount,
+	}
+	customer.nTransaction++
 
-// 		if recipientAccountNumber == customer.accountNumber {
-// 			fmt.Println("You cannot transfer to your own account, please input a different account number")
-// 		} else {
-// 			for i := 0; i < customerBank.nCustomer; i++ {
-// 				if customerBank.customers[i].accountNumber == recipientAccountNumber {
-// 					recipient = customerBank.customers[i]
-// 					found = true
-// 					i = customerBank.nCustomer
-// 				}
-// 			}
-
-// 			if !found {
-// 				fmt.Println("Recipient account number is not found, please try again")
-// 			}
-// 		}
-// 	}
-
-// 	fmt.Print("Input the amount you want to transfer: Rp.")
-// 	fmt.Scan(&amount)
-
-// 	if customer.balance < amount {
-//         fmt.Println("Balance is not enough to transfer")
-//     } else {
-//         fee := 0
-//         if customer.bankCode != recipient.bankCode {
-//             fee = 5000
-//         }
-
-//         if customer.balance < amount+fee {
-//             fmt.Println("Balance is not enough to cover the transfer amount and fee")
-//         } else {
-//             customer.balance -= (amount + fee)
-
-//             for i := 0; i < customerBank.nCustomer; i++ {
-//                 if customerBank.customers[i].accountNumber == recipientAccountNumber {
-//                     customerBank.customers[i].balance += amount
-//                     i = customerBank.nCustomer // pengganti break
-//                 }
-//             }
-
-//             fmt.Println("Transfer success")
-//         }
-//     }
-// }
+	worldBank.Banks[bankIdx].customers[recipientIdx].balance += amount
+	worldBank.Banks[bankIdx].customers[recipientIdx].transactions[worldBank.Banks[bankIdx].customers[recipientIdx].nTransaction] = Transaction{
+		transactionId:          getNewTransactionId(),
+		senderBankCode:         customer.bankCode,
+		senderAccountNumber:    customer.accountNumber,
+		recipientBankCode:      recipientBankCode,
+		recipientAccountNumber: worldBank.Banks[bankIdx].customers[recipientIdx].accountNumber,
+		amount:                 amount,
+	}
+	worldBank.Banks[bankIdx].customers[recipientIdx].nTransaction++
+}
 
 func payment(customer *Customer) {
 	fmt.Println("========================================")
@@ -171,33 +179,52 @@ func payment(customer *Customer) {
 }
 
 func payBill(customer *Customer, billIndex int) {
-    bill := &bills[billIndex]
-    if bill.isPaid {
-        fmt.Printf("The %s has already been paid\n", bill.description)
+	bill := &bills[billIndex]
+	if bill.isPaid {
+		fmt.Printf("The %s has already been paid\n", bill.description)
 		fmt.Println()
-    } else {
-        fmt.Printf("The %s is Rp.%d\n", bill.description, bill.amount)
-        var amount int
-        valid := false
+	} else {
+		fmt.Printf("The %s is Rp.%d\n", bill.description, bill.amount)
+		var amount int
+		valid := false
 
-        for !valid {
-            fmt.Print("Enter the amount to pay : Rp.")
-            fmt.Scan(&amount)
+		for !valid {
+			fmt.Print("Enter the amount to pay : Rp.")
+			fmt.Scan(&amount)
 
-            if amount != bill.amount {
-                fmt.Println("The amount to pay must be same as the bill amount, please input the right amount")
+			if amount != bill.amount {
+				fmt.Println("The amount to pay must be same as the bill amount, please input the right amount")
 				fmt.Println()
-            } else if customer.balance < amount {
-                fmt.Println("Balance is not enough to pay the bill")
+			} else if customer.balance < amount {
+				fmt.Println("Balance is not enough to pay the bill")
 				fmt.Println()
-                valid = true
-            } else {
-                customer.balance -= amount
-                bill.isPaid = true
-                fmt.Printf("The %s has been paid successfully\n", bill.description)
-                fmt.Printf("Remaining balance: Rp.%d\n", customer.balance)
-                valid = true
-            }
-        }
-    }
+				valid = true
+			} else {
+				customer.balance -= amount
+				bill.isPaid = true
+				fmt.Printf("The %s has been paid successfully\n", bill.description)
+				fmt.Printf("Remaining balance: Rp.%d\n", customer.balance)
+				valid = true
+			}
+		}
+	}
+}
+
+func transactionHistory(customer *Customer) {
+
+	if customer.nTransaction == 0 {
+		fmt.Println("No transaction history available")
+	} else {
+		fmt.Println("========================================")
+		fmt.Println("=           Transaction History        =")
+		for i := 0; i < customer.nTransaction; i++ {
+			fmt.Printf("Transaction ID: %d\n", customer.transactions[i].transactionId)
+			fmt.Printf("Sender Bank Code: %d\n", customer.transactions[i].senderBankCode)
+			fmt.Printf("Sender Account Number: %d\n", customer.transactions[i].senderAccountNumber)
+			fmt.Printf("Recipient Bank Code: %d\n", customer.transactions[i].recipientBankCode)
+			fmt.Printf("Recipient Account Number: %d\n", customer.transactions[i].recipientAccountNumber)
+			fmt.Printf("Amount: Rp.%d\n", customer.transactions[i].amount)
+			fmt.Println()
+		}
+	}
 }

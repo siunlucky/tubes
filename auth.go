@@ -81,17 +81,17 @@ func loginAdmin() {
 }
 
 // login function to login as customer
-func loginCustomer(worldBank WorldBank) {
+func loginCustomer() {
 	var accountNumber int
 	var PIN string
 
 	for attempts := 0; attempts < 3; attempts++ {
 		fmt.Println()
 		fmt.Println("========================================")
-		fmt.Print("Input Account Number : ")
-		fmt.Scan(&accountNumber)
 		fmt.Print("Input Uniqode Bank : ")
 		fmt.Scan(&uniqueBankCode)
+		fmt.Print("Input Account Number : ")
+		fmt.Scan(&accountNumber)
 		fmt.Print("Input PIN : ")
 		fmt.Scan(&PIN)
 
@@ -99,7 +99,6 @@ func loginCustomer(worldBank WorldBank) {
 
 		if bankIdx == -1 {
 			fmt.Println("Bank not found.")
-			return
 		}
 
 		// Sequential Search

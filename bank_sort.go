@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func sortBankByUniqueCode(worldBank *WorldBank, method string, direction string) {
 	// Selection Sort & insertion sort
 	if method == "selection" {
@@ -47,6 +49,6 @@ func sortBankByUniqueCode(worldBank *WorldBank, method string, direction string)
 			}
 		}
 	} else {
-		println("Invalid method")
+		fmt.Println("Method not found")
 	}
 }

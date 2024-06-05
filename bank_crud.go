@@ -128,10 +128,12 @@ func viewDataBank(worldBank WorldBank) {
 		} else {
 			fmt.Println()
 			fmt.Println("Bank Data :")
+			fmt.Println()
 			fmt.Printf("%-5s %-20s %-20s %-20s %-20s\n", "No", "Name", "Total Branch", "Unique Code", "Total Customer")
 			for i := 0; i < worldBank.nBank; i++ {
 				fmt.Printf("%-5d %-20s %-20d %-20d %-20d\n", i+1, worldBank.Banks[i].name, worldBank.Banks[i].nBranch, worldBank.Banks[i].uniqueCode, worldBank.Banks[i].nCustomer)
 			}
+			fmt.Println()
 			fmt.Println("Total Data : ", worldBank.nBank)
 			startViewBank = false
 		}
@@ -227,7 +229,7 @@ func editDataBank(worldBank *WorldBank) {
 							}
 						}
 
-						for branchChoice != 3 && branchIndex != -1 {
+						for branchChoice != 3 && branchIndex != -1 && branchIndex != 4 {
 							fmt.Println("1. Edit District")
 							fmt.Println("2. Edit City")
 							fmt.Println("3. Edit Province")
