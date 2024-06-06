@@ -8,8 +8,8 @@ func loginSuperAdmin() {
 	var credential Credential
 	var maxTrial int = 1
 	fmt.Println()
-	fmt.Println("Welcome to Dashboard World Bank System")
-	fmt.Println("--------------Login Menu--------------")
+	fmt.Println("=== Welcome to Dashboard World Bank System ===")
+	fmt.Println("=============== Login Menu ===================")
 	fmt.Print("Please Input Username : ")
 	fmt.Scan(&credential.username)
 	fmt.Print("Please Input Password : ")
@@ -18,8 +18,8 @@ func loginSuperAdmin() {
 		loading("Checking Credentials")
 		maxTrial++
 		if maxTrial == 4 {
-			fmt.Println("-- SORRY, YOU HAVE REACH THE MAXIMUM TRIAL FOR 3 TIMES --")
-			fmt.Println("--                   Back To Menu                      --")
+			fmt.Println("=== SORRY, YOU HAVE REACH THE MAXIMUM TRIAL FOR 3 TIMES ===")
+			fmt.Println("===                   Back To Menu                      ===")
 			fmt.Print("\n")
 			maxTrial = 4
 			menu()
@@ -43,8 +43,8 @@ func loginAdmin() {
 
 	maxTrial = 1
 	fmt.Println()
-	fmt.Println("Welcome to Dashboard World Bank System")
-	fmt.Println("--------------Login Menu--------------")
+	fmt.Println("=== Welcome to Dashboard Admin Bank System ===")
+	fmt.Println("=============== Login Menu ===================")
 	fmt.Print("Please Input Unique Bank Code : ")
 	fmt.Scan(&uniqueBankCode)
 	fmt.Print("Please Input Username : ")
@@ -54,8 +54,8 @@ func loginAdmin() {
 	for !isAdmin(uniqueBankCode, credential) && maxTrial < 4 {
 		maxTrial++
 		if maxTrial == 4 {
-			fmt.Println("-- SORRY, YOU HAVE REACH THE MAXIMUM TRIAL FOR 3 TIMES --")
-			fmt.Println("--                   Back To Menu                      --")
+			fmt.Println("=== SORRY, YOU HAVE REACH THE MAXIMUM TRIAL FOR 3 TIMES ===")
+			fmt.Println("===                   Back To Menu                      ===")
 			fmt.Print("\n")
 			maxTrial = 4
 			menu()
@@ -89,25 +89,28 @@ func loginCustomer() {
 		fmt.Scan(&PIN)
 
 		var bankIdx int = searchBankByUniqueCode(uniqueBankCode)
-
 		if bankIdx == -1 {
-			fmt.Println("Bank not found.")
-		}
-
-		// Sequential Search
-		for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
-			if worldBank.Banks[bankIdx].customers[i].accountNumber == accountNumber && worldBank.Banks[bankIdx].customers[i].PIN == PIN {
-				// loadingAuth("Checking Credentials")
-				fmt.Println("Login Success!")
-				customerMenu(&worldBank.Banks[bankIdx].customers[i])
-				return
+			fmt.Println("Bank not found, please input the right unique code")
+		} else {
+			// Sequential Search
+			for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
+				if worldBank.Banks[bankIdx].customers[i].accountNumber == accountNumber && worldBank.Banks[bankIdx].customers[i].PIN == PIN {
+					fmt.Println("Login Success!")
+					fmt.Println()
+					customerMenu(&worldBank.Banks[bankIdx].customers[i])
+					i = worldBank.Banks[bankIdx].nCustomer
+					attempts = 3
+					return
+				} else {
+					fmt.Println("Your account number or PIN is incorrect, please try with the right username and password")
+					i = worldBank.Banks[bankIdx].nCustomer
+				}
 			}
 		}
-		// loadingAuth("Checking Credentials")
-		fmt.Println("Your account number or PIN is incorrect")
 	}
 	fmt.Println()
 	fmt.Println("You have reached the maximum number for 3 attempts, try again")
+	fmt.Println()
 }
 
 func isSuperAdmin(credential Credential) bool {

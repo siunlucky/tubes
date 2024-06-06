@@ -62,7 +62,7 @@ func mainMenuAdmin() {
 func mainMenuCustomer() {
 	for {
 		fmt.Println("========================================")
-		fmt.Println("=             Menu Customer            =")
+		fmt.Println("=          Menu Login Customer         =")
 		fmt.Println("========================================")
 		fmt.Println("1. Login")
 		fmt.Println("2. Back to main menu")
@@ -108,11 +108,10 @@ func customerMenu(customer *Customer) {
 			payment(customer)
 		case 5:
 			transactionHistory(customer)
+		case 6:
+			break
 		default:
 			fmt.Println("Input is not valid, please input with right option")
-		}
-		if choice == 6 {
-			break
 		}
 	}
 }

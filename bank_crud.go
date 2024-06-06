@@ -91,6 +91,8 @@ func insertDataBank(worldBank *WorldBank) {
 		worldBank.nBank++
 
 		fmt.Println("Bank Uniqode Data Created Successfully")
+		fmt.Println()
+		fmt.Println("Bank Data Created Successfully")
 		startInsertBank = false
 	}
 }
