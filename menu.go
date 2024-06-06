@@ -39,10 +39,11 @@ func mainMenuAdmin() {
 		fmt.Println("2. View Customer Data")
 		fmt.Println("3. Edit Customer Data")
 		fmt.Println("4. Delete Customer")
-		fmt.Println("5. Cari By Account Number")
-		fmt.Println("7. Short Data")
-		fmt.Println("5. Logout")
+		fmt.Println("5. Search Customer Data")
+		fmt.Println("6. Sort Customer Data")
+		fmt.Println("7. Logout")
 		fmt.Print("Input : ")
+		var adminChoice int
 		fmt.Scan(&adminChoice)
 		if adminChoice == 1 {
 			insertDataCustomer(uniqueBankCode, &worldBank)
@@ -53,6 +54,39 @@ func mainMenuAdmin() {
 		} else if adminChoice == 4 {
 			deleteDataCustomer(uniqueBankCode, &worldBank)
 		} else if adminChoice == 5 {
+			// searchDataCustomer(uniqueBankCode, worldBank)
+		} else if adminChoice == 6 {
+			sortDataCustomerMenu()
+		} else if adminChoice == 7 {
+			break
+		} else {
+			fmt.Println("Input is not valid, please input with right option")
+		}
+	}
+}
+
+func sortDataCustomerMenu() {
+	for {
+		fmt.Println("\n========================================")
+		fmt.Println("=            Sort Customer Data        =")
+		fmt.Println("========================================")
+		fmt.Println("1. Sort by Name (A-Z)")
+		fmt.Println("2. Sort by Account Number (Ascending)")
+		fmt.Println("3. Sort by Card Number (Descending)")
+		fmt.Println("4. Back to Admin Menu")
+		fmt.Print("Input : ")
+		var sortChoice int
+		fmt.Scan(&sortChoice)
+		if sortChoice == 1 {
+			sortCustomerByName()
+			viewDataCustomer(uniqueBankCode, worldBank)
+		} else if sortChoice == 2 {
+			sortCustomerByAccountNumber()
+			viewDataCustomer(uniqueBankCode, worldBank)
+		} else if sortChoice == 3 {
+			sortCustomerByCardNumber()
+			viewDataCustomer(uniqueBankCode, worldBank)
+		} else if sortChoice == 4 {
 			break
 		} else {
 			fmt.Println("Input is not valid, please input with right option")

@@ -1,6 +1,5 @@
 package main
 
-// Binary Search
 func searchCustomerByIdx(bankIdx, search int) int {
 	if search >= 0 && search < worldBank.Banks[bankIdx].nCustomer {
 		return search
@@ -9,7 +8,6 @@ func searchCustomerByIdx(bankIdx, search int) int {
 	return -1
 }
 
-// Sequence Search
 func searchCustomerByNIK(bankIdx, search int) int {
 	for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
 		if search == worldBank.Banks[bankIdx].customers[i].NIK {
@@ -19,7 +17,6 @@ func searchCustomerByNIK(bankIdx, search int) int {
 	return -1
 }
 
-// Sequence Search
 func searchCustomerByAccountNumber(bankIdx, search int) int {
 	for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
 		if search == worldBank.Banks[bankIdx].customers[i].accountNumber {
@@ -29,7 +26,6 @@ func searchCustomerByAccountNumber(bankIdx, search int) int {
 	return -1
 }
 
-// Sequence Search
 func searchCustomerByCardNumber(bankIdx, search int) int {
 	for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
 		if search == worldBank.Banks[bankIdx].customers[i].cardNumber {
