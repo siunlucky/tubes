@@ -82,8 +82,6 @@ func mainMenuCustomer() {
 }
 
 func customerMenu(customer *Customer) {
-	dummyBills()
-
 	for {
 		fmt.Println()
 		fmt.Println("========================================")
