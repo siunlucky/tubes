@@ -30,7 +30,6 @@ func mainMenuSuperAdmin() {
 }
 
 var adminChoice int
-
 func mainMenuAdmin() {
 	for {
 		fmt.Println("\n========================================")
@@ -40,6 +39,8 @@ func mainMenuAdmin() {
 		fmt.Println("2. View Customer Data")
 		fmt.Println("3. Edit Customer Data")
 		fmt.Println("4. Delete Customer")
+		fmt.Println("5. Cari By Account Number")
+		fmt.Println("7. Short Data")
 		fmt.Println("5. Logout")
 		fmt.Print("Input : ")
 		fmt.Scan(&adminChoice)

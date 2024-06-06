@@ -68,7 +68,6 @@ func loginAdmin() {
 			fmt.Print("\n")
 			maxTrial = 4
 			menu()
-
 		}
 
 		fmt.Println("Login failed please try again")
@@ -82,6 +81,7 @@ func loginAdmin() {
 	}
 
 	fmt.Println("Login Success!")
+	maxTrial = 4
 	mainMenuAdmin()
 }
 
@@ -91,7 +91,10 @@ func loginCustomer() {
 
 	for attempts := 0; attempts < 3; attempts++ {
 		fmt.Println()
-		fmt.Println("========================================")
+		fmt.Println("==============================================")
+		fmt.Println("    Welcome to Dashboard Admin Bank System    ")
+		fmt.Println("                Login Menu                    ")
+		fmt.Println("==============================================")
 		fmt.Print("Input Uniqode Bank : ")
 		fmt.Scan(&uniqueBankCode)
 		fmt.Print("Input Account Number : ")

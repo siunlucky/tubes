@@ -1,18 +1,27 @@
-UPDATE :
-1) BUAT FITUR HANDLE CEK APAKAH BANKCODE ADA? LALU BARU CEK APAKAH USERNAME DAN PASSWORD NYA ADA, DI FUNCTION viewDataCustomer, UNTUK IMPLEMENTASI DI MENU DATA ADMIN DONEE
+BUG
+- DONE    BUG EDIT DATA NAMA BANK, KETIKA SELESAI/BERHASIL, DAN LANGSUNG PILIH LAGI EDIT, ITU TIDAK BISA
+- DONE    BUG EDIT DATA NAMA, PIN CUSTOMER, ADDRESS, KETIKA SELESAI/BERHASIL, DAN LANGSUNG PILIH LAGI EDIT, ITU TIDAK BISA
+- DONE    BUG LOGIN CUSROMER KETIKA SALAH INPUT
+- DONE    BUG login admin pw dan username bebas bisa masuk
+- DONE    BUG KETKA LOGOUT TIDAK MAU DI CUSTOMER
+- DONE    BUG ID TRANSAKSI -> CODE GENERATOR
+- BUG     KETIKA LOGIN ADMIN / SUPERADMIN SMAPAI MAKS, DAN LOGIN LAGI, MAKA BUG DIDALAM KETIKA LOGOUT	
 
-2) HANDLE BACK TO MAIN MENU IN viewDataCustomer DONEE
+FEAT
+- DONE    IMPLEMNTASI PAYMENT STATIS BELI
+- DONE    IMPLEMENTASI USERNAME DAN PASSWORD SAAT LOGIN ADMIN MEMAKAI DUMMY DATA ADMIN
 
-3) Implementasi shorting selection dan insertion berdasarkan urutan balance di viewDataCustomer admin bank, viewDataBank worldbank INI GUA (PROSES)
 
-4) Implementasi searching Sequential dan Binary Search ketika mencari data di function deleteDataBank, editDataBank di world bank, lalu di editDataCustomer dan deleteDataCustomer admin bank
+UPDATE
+- DONE    UPDATE UI SUPERADMIN
+- DONE    UPDATE UI ADMIN
+- DONE    UPDATE UI CUSTOMER
 
-5) Bikin bisa cek riwayat transaksi transfer disetiap user, buat di admin bank INI GUA (PROSES)
+DISCUSS
 
-6) Handle UI All INI GUA (PROSES)
 
-7) Bank Admin sudah bisa get data dummy juga DONEE
 
-8) History Transaksi Customer di Menu Customer (Done) -f
-
-9) Rombak Gabisa tf antar/sesama bank (Done) -f
+FEAT KEDEPAN ABIS DIATAS 
+ADMIN
+- Tambah menu no 5 "Cari Data" data nasabah, nanti kasih pilihan lagi ada 3 : accounnum, cardnum, nik(pakai sequence/binary/linear)
+- Tambah menu no 6 "Short Daya" data nasabah, nanti dikasih pilihan lagi ada 3 : nama, accoutn number, cardnumber, nik (pakai insertion, selction)

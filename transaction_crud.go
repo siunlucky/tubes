@@ -6,13 +6,6 @@ func viewSaldo(customer *Customer) {
 	fmt.Printf("Balance in your account is: Rp.%d\n", customer.balance)
 }
 
-var transactionCounter int
-
-func getNewTransactionId() int {
-	transactionCounter++
-	return transactionCounter
-}
-
 func transfer(customer *Customer) {
 	var recipientAccountNumber, amount, recipientIdx int
 	var input int
@@ -61,13 +54,14 @@ func transfer(customer *Customer) {
 			j = 0
 			fmt.Println("========================================")
 			fmt.Println("=            Select Bank               =")
+			fmt.Println("========================================")
 			for i := 0; i < worldBank.nBank; i++ {
 				if worldBank.Banks[i].uniqueCode != customer.bankCode {
 					fmt.Printf("%d. %s (%d)\n", j+1, worldBank.Banks[i].name, worldBank.Banks[i].uniqueCode)
 					j++
 				}
 			}
-			fmt.Print("Choose the bank option with number: ")
+			fmt.Print("Choose the bank option with number : ")
 			fmt.Scan(&bankIdx)
 			for bankIdx < 1 || bankIdx > worldBank.nBank-1 {
 				fmt.Println("Invalid bank choice, please choose the right number")
@@ -130,7 +124,7 @@ func processTransfer(customer *Customer, bankIdx int, recipientIdx int, amount i
 	customer.balance -= amount
 
 	customer.transactions[customer.nTransaction] = Transaction{
-		transactionId:          getNewTransactionId(),
+		transactionId:          codeGenerator(1000, 100000),
 		senderBankCode:         customer.bankCode,
 		senderAccountNumber:    customer.accountNumber,
 		recipientBankCode:      recipientBankCode,
@@ -141,7 +135,7 @@ func processTransfer(customer *Customer, bankIdx int, recipientIdx int, amount i
 
 	worldBank.Banks[bankIdx].customers[recipientIdx].balance += amount
 	worldBank.Banks[bankIdx].customers[recipientIdx].transactions[worldBank.Banks[bankIdx].customers[recipientIdx].nTransaction] = Transaction{
-		transactionId:          getNewTransactionId(),
+		transactionId:          codeGenerator(1000, 100000),
 		senderBankCode:         customer.bankCode,
 		senderAccountNumber:    customer.accountNumber,
 		recipientBankCode:      recipientBankCode,
@@ -217,12 +211,12 @@ func payBill(customer *Customer, payment int, billIndex int) {
 }
 
 func transactionHistory(customer *Customer) {
-
 	if customer.nTransaction == 0 {
 		fmt.Println("No transaction history available")
 	} else {
 		fmt.Println("========================================")
 		fmt.Println("=           Transaction History        =")
+		fmt.Println("========================================")
 		for i := 0; i < customer.nTransaction; i++ {
 			fmt.Printf("Transaction ID: %d\n", customer.transactions[i].transactionId)
 			fmt.Printf("Sender Bank Code: %d\n", customer.transactions[i].senderBankCode)
