@@ -14,7 +14,7 @@ func viewDataCustomer(uniqueBankCode int, worldBank WorldBank) {
 
 	for startViewCustomer {
 		if worldBank.Banks[bankIdx].nCustomer == 0 {
-			fmt.Println("There is no data to be viewed.")
+			fmt.Println("There is no data to be viewed")
 			startViewCustomer = false
 			adminChoice = 100
 		} else {
@@ -57,7 +57,7 @@ func insertDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 
 	for startInsertCustomer {
 		fmt.Println()
-		fmt.Println("==========Insert Customer Data==========")
+		fmt.Println("========== Insert Customer Data ==========")
 		fmt.Println("Customer", worldBank.Banks[bankIdx].nCustomer+1)
 
 		for worldBank.Banks[bankIdx].customers[worldBank.Banks[bankIdx].nCustomer].NIK < 1 || found {
@@ -171,6 +171,7 @@ func editDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 		}
 
 		for choice != 4 && customerIndex != -1 {
+			fmt.Println("========== Edit Customer Data ==========")
 			fmt.Println("1. Edit Name")
 			fmt.Println("2. Edit Address")
 			fmt.Println("3. Reset PIN")
@@ -178,22 +179,22 @@ func editDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 			fmt.Print("Input : ")
 			fmt.Scan(&choice)
 			for choice < 1 || choice > 5 {
-				fmt.Print("Input : ")
+				fmt.Print("Please input the right options : ")
 				fmt.Scan(&choice)
 			}
 
 			switch choice {
 			case 1:
 				fmt.Println("Old Name :", worldBank.Banks[bankIdx].customers[customerIndex-1].name)
-				fmt.Print("New Name : ")
+				fmt.Print("Input New Name : ")
 				fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].name)
 				for worldBank.Banks[bankIdx].customers[customerIndex-1].name == "" || len(worldBank.Banks[bankIdx].customers[customerIndex-1].name) < 3 {
 					if worldBank.Banks[bankIdx].customers[customerIndex-1].name == "" {
-						fmt.Println("Name field may not be empty.")
+						fmt.Println("Name field may not be empty, please input again")
 					} else if len(worldBank.Banks[bankIdx].customers[customerIndex-1].name) < 3 {
-						fmt.Println("Name should be contain more than 3 char.")
+						fmt.Println("Name should be contain more than 3 char, please input again")
 					}
-					fmt.Print("New Name : ")
+					fmt.Print("Input New Name : ")
 					fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].name)
 				}
 				fmt.Print("Customer Name Edited Successfully\n")
@@ -202,38 +203,38 @@ func editDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 				
 			case 2:
 				fmt.Println("Old Address :", worldBank.Banks[bankIdx].customers[customerIndex-1].address.district, worldBank.Banks[bankIdx].customers[customerIndex-1].address.city, worldBank.Banks[bankIdx].customers[customerIndex-1].address.province)
-				fmt.Print("New Address")
-				fmt.Print("District : ")
+				fmt.Println("New Address")
+				fmt.Print("Input District : ")
 				fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].address.district)
 				for worldBank.Banks[bankIdx].customers[customerIndex-1].address.district == "" || len(worldBank.Banks[bankIdx].customers[customerIndex-1].address.district) < 3 {
 					if worldBank.Banks[bankIdx].customers[customerIndex-1].address.district == "" {
-						fmt.Println("District field may not be empty.")
+						fmt.Println("District field may not be empty, please input again")
 					} else if len(worldBank.Banks[bankIdx].customers[customerIndex-1].address.district) < 3 {
-						fmt.Println("District should be contain more than 3 char.")
+						fmt.Println("District should be contain more than 3 char, please input again")
 					}
-					fmt.Print("District : ")
+					fmt.Print("Input District : ")
 					fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].address.district)
 				}
-				fmt.Print("City : ")
+				fmt.Print("Input City : ")
 				fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].address.city)
 				for worldBank.Banks[bankIdx].customers[customerIndex-1].address.city == "" || len(worldBank.Banks[bankIdx].customers[customerIndex-1].address.city) < 3 {
 					if worldBank.Banks[bankIdx].customers[customerIndex-1].address.city == "" {
-						fmt.Println("City field may not be empty.")
+						fmt.Println("City field may not be empty, please input again")
 					} else if len(worldBank.Banks[bankIdx].customers[customerIndex-1].address.city) < 3 {
-						fmt.Println("City should be contain more than 3 char.")
+						fmt.Println("City should be contain more than 3 char, please input again")
 					}
-					fmt.Print("City : ")
+					fmt.Print("Input City : ")
 					fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].address.city)
 				}
-				fmt.Print("Province : ")
+				fmt.Print("Input Province : ")
 				fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].address.province)
 				for worldBank.Banks[bankIdx].customers[customerIndex-1].address.province == "" || len(worldBank.Banks[bankIdx].customers[customerIndex-1].address.province) < 3 {
 					if worldBank.Banks[bankIdx].customers[customerIndex-1].address.province == "" {
-						fmt.Println("Province field may not be empty.")
+						fmt.Println("Province field may not be empty, please input again")
 					} else if len(worldBank.Banks[bankIdx].customers[customerIndex-1].address.province) < 3 {
-						fmt.Println("Province should be contain more than 3 char.")
+						fmt.Println("Province should be contain more than 3 char, please input again")
 					}
-					fmt.Print("Province : ")
+					fmt.Print("Input Province : ")
 					fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].address.province)
 				}
 				fmt.Print("Customer Address Edited Successfully\n")
@@ -241,15 +242,16 @@ func editDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 				fmt.Println()
 
 			case 3:
-				fmt.Print("New PIN : ")
+				fmt.Println("Old PIN :", worldBank.Banks[bankIdx].customers[customerIndex-1].PIN)
+				fmt.Print("Input New PIN : ")
 				fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].PIN)
 				for worldBank.Banks[bankIdx].customers[customerIndex-1].PIN == "" || len(worldBank.Banks[bankIdx].customers[customerIndex-1].PIN) != 6 {
 					if worldBank.Banks[bankIdx].customers[customerIndex-1].PIN == "" {
-						fmt.Println("PIN field may not be empty.")
+						fmt.Println("PIN field may not be empty, please input again")
 					} else if len(worldBank.Banks[bankIdx].customers[customerIndex-1].PIN) != 6 {
-						fmt.Println("PIN should be contain 6 char.")
+						fmt.Println("PIN should be contain 6 char, please input again")
 					}
-					fmt.Print("New PIN : ")
+					fmt.Print("Input New PIN : ")
 					fmt.Scan(&worldBank.Banks[bankIdx].customers[customerIndex-1].PIN)
 				}
 				fmt.Print("Customer PIN Reset Successfully\n")
@@ -268,11 +270,10 @@ func editDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 
 func deleteDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 	var customerIndex int
-
 	var bankIdx int = searchBankByUniqueCode(uniqueBankCode)
 
 	if worldBank.Banks[bankIdx].nCustomer == 0 {
-		fmt.Println("There is no data to be deleted.")
+		fmt.Println("There is no data to be deleted")
 		mainMenuAdmin()
 	}
 
@@ -282,7 +283,7 @@ func deleteDataCustomer(uniqueBankCode int, worldBank *WorldBank) {
 		fmt.Print("Input Customer Number (input -1 for cancel) : ")
 		fmt.Scan(&customerIndex)
 		for searchCustomerByIdx(bankIdx, customerIndex-1) == -1 && customerIndex != -1 {
-			fmt.Println("Customer Number is not available.")
+			fmt.Println("Customer Number is not available")
 			fmt.Print("Input Customer Number (input -1 for cancel) : ")
 			fmt.Scan(&customerIndex)
 		}

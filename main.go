@@ -16,6 +16,7 @@ func menu() {
 	dummyBills()
 	var startMenu bool = true
 	var guestChoice int
+	fmt.Println()
 	fmt.Println("What user are u?")
 	fmt.Println("1. Super Admin")
 	fmt.Println("2. Bank Admin")
