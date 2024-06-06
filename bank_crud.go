@@ -10,8 +10,9 @@ func insertDataBank(worldBank *WorldBank) {
 
 	for startInsertBank {
 		fmt.Println()
-		fmt.Println("========== Insert Bank Data ==========")
+		fmt.Println("=============== Insert Bank Data ===============")
 		fmt.Println("Bank", worldBank.nBank+1)
+
 		for worldBank.Banks[worldBank.nBank].name == "" || len(worldBank.Banks[worldBank.nBank].name) < 3 {
 			fmt.Print("Input Name : ")
 			fmt.Scan(&worldBank.Banks[worldBank.nBank].name)
@@ -74,6 +75,7 @@ func insertDataBank(worldBank *WorldBank) {
 					found = true
 				}
 			}
+
 			if worldBank.Banks[worldBank.nBank].uniqueCode == 0 {
 				fmt.Println("Unique Code field cannot be empty, please input again")
 			} else if worldBank.Banks[worldBank.nBank].uniqueCode < 100 || worldBank.Banks[worldBank.nBank].uniqueCode > 999 {
@@ -81,13 +83,14 @@ func insertDataBank(worldBank *WorldBank) {
 			} else if found {
 				fmt.Println("Unique Code is not available, please input another unique code")
 			}
-		}
+		}	
 
+		dummyDataAdmin(worldBank.nBank)
+		
 		worldBank.Banks[worldBank.nBank].nCustomer = 0
 		worldBank.nBank++
 
 		fmt.Println("Bank Uniqode Data Created Successfully")
-
 		startInsertBank = false
 	}
 }
@@ -101,9 +104,7 @@ func viewDataBank(worldBank WorldBank) {
 			startViewBank = false
 		} else {
 			fmt.Println()
-			fmt.Println("========== Bank Data ==========")
-			fmt.Println("Bank Data : ")
-			fmt.Println()
+			fmt.Println("========================================== Bank Data ===========================================")
 			fmt.Printf("%-5s %-20s %-20s %-20s %-20s\n", "No", "Name Bank", "Total Branch", "Unique Code", "Total Customer")
 			for i := 0; i < worldBank.nBank; i++ {
 				fmt.Printf("%-5d %-30s %-20d %-20d %-20d\n", i+1, worldBank.Banks[i].name, worldBank.Banks[i].nBranch, worldBank.Banks[i].uniqueCode, worldBank.Banks[i].nCustomer)

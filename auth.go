@@ -1,16 +1,13 @@
 package main
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
-// AUTH MENU
 
-// loginSuperAdmin function to login as super admin
+
 func loginSuperAdmin() {
 	var credential Credential
 	var maxTrial int = 1
+	fmt.Println()
 	fmt.Println("Welcome to Dashboard World Bank System")
 	fmt.Println("--------------Login Menu--------------")
 	fmt.Print("Please Input Username : ")
@@ -35,29 +32,26 @@ func loginSuperAdmin() {
 		fmt.Scan(&credential.password)
 	}
 	loading("Checking Credentials")
-
 	fmt.Println("Login Success!")
 	mainMenuSuperAdmin()
 }
 
-// loginAdmin function to login as admin
-
 var uniqueBankCode int
-
 func loginAdmin() {
-	// var credential Credential
+	var credential Credential
 	var maxTrial int
 
 	maxTrial = 1
+	fmt.Println()
 	fmt.Println("Welcome to Dashboard World Bank System")
 	fmt.Println("--------------Login Menu--------------")
 	fmt.Print("Please Input Unique Bank Code : ")
 	fmt.Scan(&uniqueBankCode)
-	// fmt.Print("Please Input Username : ")
-	// fmt.Scan(&credential.username)
-	// fmt.Print("Please Input Password : ")
-	// fmt.Scan(&credential.password)
-	for !isAdmin(uniqueBankCode) && maxTrial < 4 {
+	fmt.Print("Please Input Username : ")
+	fmt.Scan(&credential.username)
+	fmt.Print("Please Input Password : ")
+	fmt.Scan(&credential.password)
+	for !isAdmin(uniqueBankCode, credential) && maxTrial < 4 {
 		maxTrial++
 		if maxTrial == 4 {
 			fmt.Println("-- SORRY, YOU HAVE REACH THE MAXIMUM TRIAL FOR 3 TIMES --")
@@ -70,17 +64,16 @@ func loginAdmin() {
 		fmt.Print("Login failed please try again\n")
 		fmt.Print("Please Input Unique Bank Code : ")
 		fmt.Scan(&uniqueBankCode)
-		// fmt.Print("Please Input Username : ")
-		// fmt.Scan(&credential.username)
-		// fmt.Print("Please Input Password : ")
-		// fmt.Scan(&credential.password)
+		fmt.Print("Please Input Username : ")
+		fmt.Scan(&credential.username)
+		fmt.Print("Please Input Password : ")
+		fmt.Scan(&credential.password)
 	}
 
 	fmt.Println("Login Success!")
 	mainMenuAdmin()
 }
 
-// login function to login as customer
 func loginCustomer() {
 	var accountNumber int
 	var PIN string
@@ -115,38 +108,8 @@ func loginCustomer() {
 	}
 	fmt.Println()
 	fmt.Println("You have reached the maximum number for 3 attempts, try again")
-	// loadingFailLogin()
 }
 
-// logoutSuperAdmin function to logout the super admin
-func logoutSuperAdmin() {
-	var logout string
-	fmt.Println("Are you sure want to logout? (Y/N)")
-
-	fmt.Scan(&logout)
-	for logout != "Y" && logout != "y" && logout != "N" && logout != "n" {
-		fmt.Println("Please input the right option")
-		fmt.Scan(&logout)
-	}
-
-	if logout == "Y" || logout == "y" {
-		loading("Logging Out")
-		fmt.Print("Logging Out Success!\n")
-		fmt.Println("Thank you for using our service!")
-		fmt.Println("You will redirect to the main menu in 3 seconds")
-		time.Sleep(3 * time.Second)
-		clearTerminal()
-		menu()
-		uniqueBankCode = 0
-	} else if logout == "N" || logout == "n" {
-		clearTerminal()
-		mainMenuSuperAdmin()
-	}
-}
-
-// AUTH LOGIC
-
-// isSuperAdmin function to check the credential
 func isSuperAdmin(credential Credential) bool {
 	if credential.username == SuperAdmin.username && credential.password == SuperAdmin.password {
 		return true
@@ -154,18 +117,17 @@ func isSuperAdmin(credential Credential) bool {
 	return false
 }
 
-// isAdmin function to check the credential
-func isAdmin(uniqueBankCode int) bool {
+func isAdmin(uniqueBankCode int, credential Credential) bool {
 	var idx int = searchBankByUniqueCode(uniqueBankCode)
 	if idx == -1 {
 		return false
 	}
 
-	// for i := 0; i < worldBank.Banks[idx].nAdmin; i++ {
-	// 	if credential.username == worldBank.Banks[idx].admins[i].username && credential.password == worldBank.Banks[idx].admins[i].password {
-	// 		return true
-	// 	}
-	// }
+	for i := 0; i < worldBank.Banks[idx].nAdmin; i++ {
+		if credential.username == worldBank.Banks[idx].admins[i].username && credential.password == worldBank.Banks[idx].admins[i].password {
+			return true
+		}
+	}
 
 	return true
 }

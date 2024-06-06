@@ -38,11 +38,9 @@ func menu() {
 	case 1:
 		clearTerminal()
 		loginSuperAdmin()
-		// mainMenuSuperAdmin()
 	case 2:
 		clearTerminal()
 		loginAdmin()
-		// mainMenuAdmin()
 	case 3:
 		clearTerminal()
 		mainMenuCustomer()
@@ -51,22 +49,21 @@ func menu() {
 	}
 }
 
-// exit function to exit the program
 func exit() {
 	var exit string
 	fmt.Println("Are you sure want to exit? (Y/N)")
 
 	fmt.Scan(&exit)
 	for exit != "Y" && exit != "y" && exit != "N" && exit != "n" {
-		fmt.Println("Please input the right option")
+		fmt.Println("Please input the right option Y / N")
 		fmt.Scan(&exit)
 	}
 
 	if exit == "Y" || exit == "y" {
-		fmt.Println("Thank you for using our service")
+		fmt.Println("Thank you for coming")
 		startProgram = false
 	} else if exit == "N" || exit == "n" {
-		fmt.Println("Thank you for using our service")
+		fmt.Println("Bank to menu")
 		fmt.Print("\n")
 		menu()
 	}

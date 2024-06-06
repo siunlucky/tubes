@@ -3,7 +3,6 @@ package main
 import "fmt"
 
 func dummyData(n int) {
-
 	for i := 0; i < n; i++ {
 		worldBank.Banks[i].name = "Bank" + fmt.Sprint(i+1)
 		dummyBankBranch(i, n)
@@ -17,9 +16,9 @@ func dummyData(n int) {
 func dummyBankBranch(bankIdx, n int) {
 	for i := 0; i < n; i++ {
 		worldBank.Banks[bankIdx].branch[i] = Address{
-			district: "Dist " + fmt.Sprint(i+1),
-			city:     "City " + fmt.Sprint(i+1),
-			province: "Prov " + fmt.Sprint(i+1),
+			district: "Dist" + fmt.Sprint(i+1),
+			city:     "City" + fmt.Sprint(i+1),
+			province: "Prov" + fmt.Sprint(i+1),
 		}
 		worldBank.Banks[bankIdx].nBranch++
 	}
@@ -33,11 +32,11 @@ func dummyDataCustomer(bankIdx, n int) {
 			cardNumber:    codeGenerator(1000000000000000, 9999999999999999),
 			PIN:           "123456",
 			NIK:           codeGenerator(1000000000000000, 9999999999999999),
-			name:          "Customer " + fmt.Sprint(i+1),
+			name:          "Customer" + fmt.Sprint(i+1),
 			address: Address{
-				district: "Dist " + fmt.Sprint(i+1),
-				city:     "City " + fmt.Sprint(i+1),
-				province: "Prov " + fmt.Sprint(i+1),
+				district: "Dist" + fmt.Sprint(i+1),
+				city:     "City" + fmt.Sprint(i+1),
+				province: "Prov" + fmt.Sprint(i+1),
 			},
 			bankCode: worldBank.Banks[bankIdx].uniqueCode,
 		}
@@ -54,6 +53,22 @@ func dummyDataAdmin(bankIdx int) {
 		},
 	}
 	worldBank.Banks[bankIdx].nAdmin++
+}
+
+func dummyBills() {
+	var bill1 Bill
+	bill1.description = "Electricity Bill"
+	bill1.amount = 120000
+	bill1.isPaid = false
+	bills[0] = bill1
+
+	var bill2 Bill
+	bill2.description = "Water Bill"
+	bill2.amount = 50000
+	bill2.isPaid = false
+	bills[1] = bill2
+
+	nBills = 2
 }
 
 // func addCustomerToBank(customer Customer) {
@@ -73,19 +88,3 @@ func dummyDataAdmin(bankIdx int) {
 // 		}
 // 	}
 // }
-
-func dummyBills() {
-	var bill1 Bill
-	bill1.description = "Electricity Bill"
-	bill1.amount = 120000
-	bill1.isPaid = false
-	bills[0] = bill1
-
-	var bill2 Bill
-	bill2.description = "Hutang Bill"
-	bill2.amount = 500000
-	bill2.isPaid = false
-	bills[1] = bill2
-
-	nBills = 2
-}
