@@ -73,6 +73,7 @@ func mainMenuCustomer() {
 
 		if choice == 1 {
 			loginCustomer()
+			break
 		} else if choice == 2 {
 			break
 		} else {
@@ -97,20 +98,19 @@ func customerMenu(customer *Customer) {
 		var choice int
 		fmt.Scan(&choice)
 
-		switch choice {
-		case 1:
+		if choice ==  1 {
 			viewSaldo(customer)
-		case 2:
+		} else if choice == 2 {
 			transfer(customer)
-		case 3:
+		} else if choice == 3 {
 			topUpSaldo(customer)
-		case 4:
+		} else if choice == 4 {
 			payment(customer)
-		case 5:
+		} else if choice == 5 {
 			transactionHistory(customer)
-		case 6:
+		} else if choice == 6{
 			break
-		default:
+		} else {
 			fmt.Println("Input is not valid, please input with right option")
 		}
 	}

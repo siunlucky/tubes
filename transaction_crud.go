@@ -125,7 +125,7 @@ func processTransfer(customer *Customer, bankIdx int, recipientIdx int, amount i
 	recipientBankCode := customer.bankCode
 	if isDifferentBank {
 		recipientBankCode = worldBank.Banks[bankIdx].uniqueCode
-		customer.balance -= 5000 // Transfer fee
+		customer.balance -= 5000
 	}
 	customer.balance -= amount
 
@@ -154,59 +154,65 @@ func processTransfer(customer *Customer, bankIdx int, recipientIdx int, amount i
 func payment(customer *Customer) {
 	fmt.Println("========================================")
 	fmt.Println("=               Payments               =")
+	fmt.Println("========================================")
+	fmt.Println("1. Buy Electricity Token = Rp.100000")
+	fmt.Println("2. Buy Water = Rp.50000")
+	fmt.Println("3. Buy Internet = Rp.200000")
 
-	hasUnpaidBills := false
-	for i := 0; i < nBills; i++ {
-		if !bills[i].isPaid {
-			fmt.Printf("%d. %s - Rp.%d\n", i+1, bills[i].description, bills[i].amount)
-			hasUnpaidBills = true
-		}
-	}
+	var startPayment bool = true
+	var input, amount int
+	fmt.Print("Choose the payment option with number : ")
+	fmt.Scan(&input)
 
-	if !hasUnpaidBills {
-		fmt.Println("No unpaid bills available")
-	} else {
-		fmt.Print("Choose the bill you want to pay : ")
-		var billChoice int
-		fmt.Scan(&billChoice)
-
-		if billChoice < 1 || billChoice > nBills || bills[billChoice-1].isPaid {
-			fmt.Println("Invalid choice, please choose the right number")
+	for startPayment {
+		if input == 1 {
+			fmt.Println("Input the amount you want to pay : Rp.100000")
+			fmt.Scan(&amount)
+			payBill(customer, amount, 1)
+			startPayment = false
+		} else if input == 2 {
+			fmt.Println("Input the amount you want to pay : Rp.50000")
+			fmt.Scan(&amount)
+			payBill(customer, amount, 2)
+			startPayment = false
+		} else if input == 3 {
+			fmt.Println("Input the amount you want to pay : Rp.200000")
+			fmt.Scan(&amount)
+			payBill(customer, amount, 4)
+			startPayment = false
 		} else {
-			payBill(customer, billChoice-1)
+			fmt.Println()
+			fmt.Println("Input is not valid, please input with right option")
+			fmt.Println()
+			fmt.Println("1. Buy Electricity Token = Rp.100000")
+			fmt.Println("2. Buy Water = Rp.50000")
+			fmt.Println("3. Buy Internet = Rp.200000")
+			fmt.Scan(&input)
 		}
 	}
 }
 
-func payBill(customer *Customer, billIndex int) {
-	bill := &bills[billIndex]
-	if bill.isPaid {
-		fmt.Printf("The %s has already been paid\n", bill.description)
+func payBill(customer *Customer, payment int, billIndex int) {
+	var bill int
+	if billIndex == 1 {
+		bill = 100000
+	} else if billIndex == 2 {
+		bill = 50000
+	} else {
+		bill = 200000
+	}
+
+	if payment != bill {
+		fmt.Println("The amount to pay must be same as the bill amount, please input the right amount")
+		fmt.Println()
+	} else if customer.balance < payment {
+		fmt.Println("Balance is not enough to pay the bill, please top up your balance first")
 		fmt.Println()
 	} else {
-		fmt.Printf("The %s is Rp.%d\n", bill.description, bill.amount)
-		var amount int
-		valid := false
-
-		for !valid {
-			fmt.Print("Enter the amount to pay : Rp.")
-			fmt.Scan(&amount)
-
-			if amount != bill.amount {
-				fmt.Println("The amount to pay must be same as the bill amount, please input the right amount")
-				fmt.Println()
-			} else if customer.balance < amount {
-				fmt.Println("Balance is not enough to pay the bill")
-				fmt.Println()
-				valid = true
-			} else {
-				customer.balance -= amount
-				bill.isPaid = true
-				fmt.Printf("The %s has been paid successfully\n", bill.description)
-				fmt.Printf("Remaining balance: Rp.%d\n", customer.balance)
-				valid = true
-			}
-		}
+		customer.balance -= payment
+		fmt.Println("The bill has been paid successfully")
+		fmt.Printf("Remaining balance: Rp.%d\n", customer.balance)
+		fmt.Println()
 	}
 }
 

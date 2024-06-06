@@ -55,21 +55,6 @@ func dummyDataAdmin(bankIdx int) {
 	worldBank.Banks[bankIdx].nAdmin++
 }
 
-func dummyBills() {
-	var bill1 Bill
-	bill1.description = "Electricity Bill"
-	bill1.amount = 120000
-	bill1.isPaid = false
-	bills[0] = bill1
-
-	var bill2 Bill
-	bill2.description = "Water Bill"
-	bill2.amount = 50000
-	bill2.isPaid = false
-	bills[1] = bill2
-
-	nBills = 2
-}
 
 // func addCustomerToBank(customer Customer) {
 // 	for i := 0; i < worldBank.nBank; i++ {

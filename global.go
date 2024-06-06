@@ -73,15 +73,3 @@ type Address struct {
 	city     string
 	province string
 }
-
-const NMAX_Bills = 10
-
-type Bill struct {
-	description string
-	amount      int
-	isPaid      bool
-}
-
-var bills [NMAX_Bills]Bill
-
-var nBills int

@@ -13,7 +13,6 @@ func main() {
 }
 
 func menu() {
-	dummyBills()
 	var startMenu bool = true
 	var guestChoice int
 	fmt.Println()

@@ -8,8 +8,10 @@ func loginSuperAdmin() {
 	var credential Credential
 	var maxTrial int = 1
 	fmt.Println()
-	fmt.Println("=== Welcome to Dashboard World Bank System ===")
-	fmt.Println("=============== Login Menu ===================")
+	fmt.Println("==============================================")
+	fmt.Println("    Welcome to Dashboard World Bank System    ")
+	fmt.Println("                Login Menu                    ")
+	fmt.Println("==============================================")
 	fmt.Print("Please Input Username : ")
 	fmt.Scan(&credential.username)
 	fmt.Print("Please Input Password : ")
@@ -18,8 +20,10 @@ func loginSuperAdmin() {
 		loading("Checking Credentials")
 		maxTrial++
 		if maxTrial == 4 {
+			fmt.Println("===========================================================")
 			fmt.Println("=== SORRY, YOU HAVE REACH THE MAXIMUM TRIAL FOR 3 TIMES ===")
 			fmt.Println("===                   Back To Menu                      ===")
+			fmt.Println("===========================================================")
 			fmt.Print("\n")
 			maxTrial = 4
 			menu()
@@ -43,8 +47,10 @@ func loginAdmin() {
 
 	maxTrial = 1
 	fmt.Println()
-	fmt.Println("=== Welcome to Dashboard Admin Bank System ===")
-	fmt.Println("=============== Login Menu ===================")
+	fmt.Println("==============================================")
+	fmt.Println("    Welcome to Dashboard Admin Bank System    ")
+	fmt.Println("                Login Menu                    ")
+	fmt.Println("==============================================")
 	fmt.Print("Please Input Unique Bank Code : ")
 	fmt.Scan(&uniqueBankCode)
 	fmt.Print("Please Input Username : ")
@@ -54,14 +60,19 @@ func loginAdmin() {
 	for !isAdmin(uniqueBankCode, credential) && maxTrial < 4 {
 		maxTrial++
 		if maxTrial == 4 {
+			fmt.Println()
+			fmt.Println("===========================================================")
 			fmt.Println("=== SORRY, YOU HAVE REACH THE MAXIMUM TRIAL FOR 3 TIMES ===")
 			fmt.Println("===                   Back To Menu                      ===")
+			fmt.Println("===========================================================")
 			fmt.Print("\n")
 			maxTrial = 4
 			menu()
+
 		}
 
-		fmt.Print("Login failed please try again\n")
+		fmt.Println("Login failed please try again")
+		fmt.Println()
 		fmt.Print("Please Input Unique Bank Code : ")
 		fmt.Scan(&uniqueBankCode)
 		fmt.Print("Please Input Username : ")
@@ -96,7 +107,6 @@ func loginCustomer() {
 			for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
 				if worldBank.Banks[bankIdx].customers[i].accountNumber == accountNumber && worldBank.Banks[bankIdx].customers[i].PIN == PIN {
 					fmt.Println("Login Success!")
-					fmt.Println()
 					customerMenu(&worldBank.Banks[bankIdx].customers[i])
 					i = worldBank.Banks[bankIdx].nCustomer
 					attempts = 3
@@ -132,5 +142,5 @@ func isAdmin(uniqueBankCode int, credential Credential) bool {
 		}
 	}
 
-	return true
+	return false
 }
