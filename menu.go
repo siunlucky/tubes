@@ -67,7 +67,8 @@ func mainMenuAdmin() {
 
 func sortDataCustomerMenu() {
 	for {
-		fmt.Println("\n========================================")
+		fmt.Println()
+		fmt.Println("========================================")
 		fmt.Println("=            Sort Customer Data        =")
 		fmt.Println("========================================")
 		fmt.Println("1. Sort by Name (A-Z)")
@@ -87,29 +88,6 @@ func sortDataCustomerMenu() {
 			sortCustomerByCardNumber()
 			viewDataCustomer(uniqueBankCode, worldBank)
 		} else if sortChoice == 4 {
-			break
-		} else {
-			fmt.Println("Input is not valid, please input with right option")
-		}
-	}
-}
-
-func mainMenuCustomer() {
-	for {
-		fmt.Println("========================================")
-		fmt.Println("=          Menu Login Customer         =")
-		fmt.Println("========================================")
-		fmt.Println("1. Login")
-		fmt.Println("2. Back to main menu")
-		fmt.Print("Choose the menu option with number : ")
-
-		var choice int
-		fmt.Scan(&choice)
-
-		if choice == 1 {
-			loginCustomer()
-			break
-		} else if choice == 2 {
 			break
 		} else {
 			fmt.Println("Input is not valid, please input with right option")
@@ -150,3 +128,26 @@ func customerMenu(customer *Customer) {
 		}
 	}
 }
+
+// func mainMenuCustomer() {
+// 	for {
+// 		fmt.Println()
+// 		fmt.Println("========================================")
+// 		fmt.Println("=          Menu Login Customer         =")
+// 		fmt.Println("========================================")
+// 		fmt.Println("1. Login")
+// 		fmt.Println("2. Back to main menu")
+// 		fmt.Print("Choose the menu option with number : ")
+
+// 		var choice int
+// 		fmt.Scan(&choice)
+
+// 		if choice == 1 {
+// 			loginCustomer()
+// 		} else if choice == 2 {
+// 			break
+// 		} else {
+// 			fmt.Println("Input is not valid, please input with right option")
+// 		}
+// 	}
+// }

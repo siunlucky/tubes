@@ -5,7 +5,11 @@ BUG
 - DONE    BUG login admin pw dan username bebas bisa masuk
 - DONE    BUG KETKA LOGOUT TIDAK MAU DI CUSTOMER
 - DONE    BUG ID TRANSAKSI -> CODE GENERATOR
-- BUG     KETIKA LOGIN ADMIN / SUPERADMIN SMAPAI MAKS, DAN LOGIN LAGI, MAKA BUG DIDALAM KETIKA LOGOUT	
+- DONE    BUG KETIKA LOGIN ADMIN / SUPERADMIN SMAPAI MAKS, DAN LOGIN LAGI, MAKA BUG DIDALAM KETIKA LOGOUT
+- BUG     DI LOGIN CUSTOMER KETIKA LOGIN GAGAL, DAN LOGIN LAGI TERUS BERHASIL, MAKA BUG DIDALAM KETIKA LOGOUT
+(MEKANISME BUG GINI, JADI LU COBA LOGIN LEBIH DARI 3 KALI USER YANG BERARTI DISALAHAIN, TERUS LU COBA LOGIN LAGI, NANTI LU COBA LOGIN DENGAM BENAR, ITU ADA BUG, DAN KALO
+PUN BERHASIL, PAS LOGOUT ITU BUG) 
+
 
 FEAT
 - DONE    IMPLEMNTASI PAYMENT STATIS BELI
@@ -25,3 +29,16 @@ FEAT KEDEPAN ABIS DIATAS
 ADMIN
 - Tambah menu no 5 "Cari Data" data nasabah, nanti kasih pilihan lagi ada 3 : accounnum, cardnum, nik(pakai sequence/binary/linear)
 - DONE    Tambah menu no 6 "Short Daya" data nasabah, nanti dikasih pilihan lagi ada 3 : nama, accoutn number, cardnumber, nik (pakai insertion, selction)
+
+
+
+func clearscreen() {
+	// "\033[2J" adalah string yang berisi urutan escape ANSI. Urutan ini digunakan untuk membersihkan layar terminal. Penjelasan lebih lanjut:
+	// 1) \033 adalah escape character (ESC) dalam notasi oktal (ASCII code 27).
+	// 2) [2J adalah bagian dari urutan escape yang memberitahu terminal untuk menghapus layar seluruhnya.
+	fmt.Print("\033[2J")
+	// "\033[H" adalah urutan escape ANSI lain yang digunakan untuk memindahkan kursor ke posisi kiri atas layar (baris 1, kolom 1).
+	// 1) \033 adalah escape character (ESC) yang sama seperti sebelumnya.
+	// 2) [H memberitahu terminal untuk memindahkan kursor ke posisi home (kiri atas).
+	fmt.Print("\033[H")
+}

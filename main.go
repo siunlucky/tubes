@@ -6,7 +6,6 @@ var startProgram bool = true
 
 func main() {
 	dummyData(5)
-	loading("Starting Program")
 	for startProgram {
 		menu()
 	}
@@ -16,6 +15,7 @@ func menu() {
 	var startMenu bool = true
 	var guestChoice int
 	fmt.Println()
+	clearTerminal()
 	fmt.Println("What user are you?")
 	fmt.Println("1. Super Admin")
 	fmt.Println("2. Bank Admin")
@@ -43,7 +43,7 @@ func menu() {
 		loginAdmin()
 	case 3:
 		clearTerminal()
-		mainMenuCustomer()
+		loginCustomer()
 	case 4:
 		exit()
 	}

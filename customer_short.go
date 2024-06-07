@@ -2,8 +2,6 @@ package main
 
 import "fmt"
 
-
-
 // insertion sort A-Z
 func sortCustomerByName() {
 	bankIdx := searchBankByUniqueCode(uniqueBankCode)
@@ -62,3 +60,58 @@ func sortCustomerByCardNumber() {
 		worldBank.Banks[bankIdx].customers[idx] = temp
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// func sortCustomerByName() {
+// 	var bankIdx, pass, i int
+// 	var temp Customer
+// 	bankIdx = searchBankByUniqueCode(uniqueBankCode)
+// 	pass = 1
+
+// 	if bankIdx == -1 {
+// 		return
+// 	}
+
+// 	for pass <= customerBank.nCustomer -1 {
+// 		i = pass
+// 		temp = customerBank.customers[pass]
+// 		for i > 0 && customerBank.customers[i-1].name > temp.name {
+// 			customerBank.customers[i] = customerBank.customers[i-1]
+// 			i = i - 1
+// 		}
+// 		customerBank.customers[i] = temp
+// 		pass = pass + 1
+// 	}	
+// }
+
+// func sortCustomerByAccountNumber() {
+// 	var bankIdx, pass, i int
+// 	var temp Customer
+// 	bankIdx = searchBankByUniqueCode(uniqueBankCode)
+// 	pass = 1
+
+// 	if bankIdx == -1 {
+// 		return
+// 	}
+
+// 	for pass <= customerBank.nCustomer -1 {
+// 		i = pass
+// 		temp = customerBank.customers[pass]
+// 		for i > 0 && customerBank.customers[i-1].accountNumber > temp.accountNumber {
+// 			customerBank.customers[i] = customerBank.customers[i-1]
+// 			i = i - 1
+// 		}
+// 		customerBank.customers[i] = temp
+// 		pass = pass + 1
+// 	}
+// }
