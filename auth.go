@@ -41,6 +41,7 @@ func loginSuperAdmin() {
 }
 
 var uniqueBankCode int
+
 func loginAdmin() {
 	var credential Credential
 	var maxTrial int
@@ -91,6 +92,7 @@ func loginCustomer() {
 	var accountNumber int
 	var PIN string
 	var maxTrial int
+	var customerIdx, bankIdx int
 
 	maxTrial = 1
 	fmt.Println()
@@ -129,11 +131,14 @@ func loginCustomer() {
 		fmt.Scan(&PIN)
 	}
 
+	bankIdx = searchBankByUniqueCode(uniqueBankCode)
+	customerIdx = searchCustomerByCredentials(bankIdx, accountNumber, PIN)
+
 	fmt.Println("Login Success!")
 	maxTrial = 4
 
 	// IZ, INI COBA DIAKALIN BIAR BISA NGIRIM PARAMATER YANG SEDSUAI DI customerMenu()
-	// customerMenu()
+	customerMenu(&worldBank.Banks[bankIdx].customers[customerIdx])
 }
 
 // INI CODE SEBELUMNYA IZ

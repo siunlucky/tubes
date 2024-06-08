@@ -61,17 +61,6 @@ func sortCustomerByCardNumber() {
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
 // func sortCustomerByName() {
 // 	var bankIdx, pass, i int
 // 	var temp Customer
@@ -91,7 +80,7 @@ func sortCustomerByCardNumber() {
 // 		}
 // 		customerBank.customers[i] = temp
 // 		pass = pass + 1
-// 	}	
+// 	}
 // }
 
 // func sortCustomerByAccountNumber() {

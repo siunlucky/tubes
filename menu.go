@@ -30,6 +30,7 @@ func mainMenuSuperAdmin() {
 }
 
 var adminChoice int
+
 func mainMenuAdmin() {
 	for {
 		fmt.Println("\n========================================")
@@ -54,7 +55,7 @@ func mainMenuAdmin() {
 		} else if adminChoice == 4 {
 			deleteDataCustomer(uniqueBankCode, &worldBank)
 		} else if adminChoice == 5 {
-			// searchDataCustomer(uniqueBankCode, worldBank)
+			searchDataCustomerMenu()
 		} else if adminChoice == 6 {
 			sortDataCustomerMenu()
 		} else if adminChoice == 7 {
@@ -62,6 +63,69 @@ func mainMenuAdmin() {
 		} else {
 			fmt.Println("Input is not valid, please input with right option")
 		}
+	}
+}
+
+func searchDataCustomerMenu() {
+	for {
+		fmt.Println()
+		fmt.Println("========================================")
+		fmt.Println("=            Search Customer Data      =")
+		fmt.Println("========================================")
+		fmt.Println("1. Search by Name")
+		fmt.Println("2. Search by Account Number")
+		fmt.Println("3. Search by Card Number")
+		fmt.Println("4. Search by NIK")
+		fmt.Println("5. Back to Admin Menu")
+		fmt.Print("Input : ")
+		var searchChoice int
+		var bankIdx int
+		var customerIdx int
+		bankIdx = searchBankByUniqueCode(uniqueBankCode)
+		fmt.Scan(&searchChoice)
+		if searchChoice == 1 {
+			fmt.Print("Input name to search : ")
+			var searchName string
+			fmt.Scan(&searchName)
+			customerIdx = searchCustomerByName(bankIdx, searchName)
+			printCustomerData(bankIdx, customerIdx)
+		} else if searchChoice == 2 {
+			fmt.Print("Input account number to search : ")
+			var searchAccountNumber int
+			fmt.Scan(&searchAccountNumber)
+			customerIdx = searchCustomerByAccountNumber(bankIdx, searchAccountNumber)
+			printCustomerData(bankIdx, customerIdx)
+		} else if searchChoice == 3 {
+			fmt.Print("Input card number to search : ")
+			var searchCardNumber int
+			fmt.Scan(&searchCardNumber)
+			customerIdx = searchCustomerByCardNumber(bankIdx, searchCardNumber)
+			printCustomerData(bankIdx, customerIdx)
+		} else if searchChoice == 4 {
+			fmt.Print("Input NIK to search : ")
+			var searchNIK int
+			fmt.Scan(&searchNIK)
+			customerIdx = searchCustomerByNIK(bankIdx, searchNIK)
+			printCustomerData(bankIdx, customerIdx)
+		} else if searchChoice == 5 {
+			break
+		} else {
+			fmt.Println("Input is not valid, please input with right option")
+		}
+	}
+}
+
+func printCustomerData(bankIdx, customerIdx int) {
+	if customerIdx == -1 {
+		fmt.Println("Customer not found")
+	} else {
+		var address string
+		address = worldBank.Banks[bankIdx].customers[customerIdx].address.district + ", " + worldBank.Banks[bankIdx].customers[customerIdx].address.city + ", " + worldBank.Banks[bankIdx].customers[customerIdx].address.province
+		fmt.Println("Name : ", worldBank.Banks[bankIdx].customers[customerIdx].name)
+		fmt.Println("Account Number : ", worldBank.Banks[bankIdx].customers[customerIdx].accountNumber)
+		fmt.Println("Card Number : ", worldBank.Banks[bankIdx].customers[customerIdx].cardNumber)
+		fmt.Println("Balance : ", worldBank.Banks[bankIdx].customers[customerIdx].balance)
+		fmt.Println("Address : ", address)
 	}
 }
 
@@ -111,7 +175,7 @@ func customerMenu(customer *Customer) {
 		var choice int
 		fmt.Scan(&choice)
 
-		if choice ==  1 {
+		if choice == 1 {
 			viewSaldo(customer)
 		} else if choice == 2 {
 			transfer(customer)
@@ -121,7 +185,7 @@ func customerMenu(customer *Customer) {
 			payment(customer)
 		} else if choice == 5 {
 			transactionHistory(customer)
-		} else if choice == 6{
+		} else if choice == 6 {
 			break
 		} else {
 			fmt.Println("Input is not valid, please input with right option")
