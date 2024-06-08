@@ -123,7 +123,7 @@ func loginCustomer() {
 
 		fmt.Println("Login failed please try again")
 		fmt.Println()
-		fmt.Print("Please Input Unique Customer Bank Code xxxxx : ")
+		fmt.Print("Please Input Unique Customer Bank Code : ")
 		fmt.Scan(&uniqueBankCode)
 		fmt.Print("Please Input Account Number : ")
 		fmt.Scan(&accountNumber)
