@@ -54,22 +54,3 @@ func dummyDataAdmin(bankIdx int) {
 	}
 	worldBank.Banks[bankIdx].nAdmin++
 }
-
-
-// func addCustomerToBank(customer Customer) {
-// 	for i := 0; i < worldBank.nBank; i++ {
-// 		if worldBank.Banks[i].uniqueCode == customer.bankCode {
-// 			if worldBank.Banks[i].nCustomer < NMAX {
-// 				worldBank.Banks[i].customers[worldBank.Banks[i].nCustomer] = customer
-// 				worldBank.Banks[i].nCustomer++
-// 			} else {
-// 				fmt.Println("Customer bank is full, unable to add more customers")
-// 				fmt.Println("Back to Main Menu")
-// 				loadingAuth("Loading")
-// 				fmt.Println()
-// 				menu()
-// 			}
-// 			return
-// 		}
-// 	}
-// }

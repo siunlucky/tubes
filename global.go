@@ -49,15 +49,7 @@ type Customer struct {
 	name          string
 	address       Address
 	bankCode      int
-	branchAddress Address
 }
-
-type CustomerBank struct {
-	customers [NMAX]Customer
-	nCustomer int
-}
-
-var customerBank CustomerBank
 
 type Transaction struct {
 	transactionId          int

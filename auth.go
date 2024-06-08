@@ -137,51 +137,8 @@ func loginCustomer() {
 	fmt.Println("Login Success!")
 	maxTrial = 4
 
-	// IZ, INI COBA DIAKALIN BIAR BISA NGIRIM PARAMATER YANG SEDSUAI DI customerMenu()
 	customerMenu(&worldBank.Banks[bankIdx].customers[customerIdx])
 }
-
-// INI CODE SEBELUMNYA IZ
-// func loginCustomer() {
-// 	var accountNumber int
-// 	var PIN string
-
-// 	for attempts := 0; attempts < 3; attempts++ {
-// 		fmt.Println()
-// 		fmt.Println("==============================================")
-// 		fmt.Println("    Welcome to Dashboard Admin Bank System    ")
-// 		fmt.Println("                Login Menu                    ")
-// 		fmt.Println("==============================================")
-// 		fmt.Print("Input Uniqode Bank : ")
-// 		fmt.Scan(&uniqueBankCode)
-// 		fmt.Print("Input Account Number : ")
-// 		fmt.Scan(&accountNumber)
-// 		fmt.Print("Input PIN : ")
-// 		fmt.Scan(&PIN)
-
-// 		var bankIdx int = searchBankByUniqueCode(uniqueBankCode)
-// 		if bankIdx == -1 {
-// 			fmt.Println("Bank not found, please input the right unique code")
-// 		} else {
-// 			// Sequential Search
-// 			for i := 0; i < worldBank.Banks[bankIdx].nCustomer; i++ {
-// 				if worldBank.Banks[bankIdx].customers[i].accountNumber == accountNumber && worldBank.Banks[bankIdx].customers[i].PIN == PIN {
-// 					fmt.Println("Login Success!")
-// 					customerMenu(&worldBank.Banks[bankIdx].customers[i])
-// 					i = worldBank.Banks[bankIdx].nCustomer
-// 					attempts = 3
-// 					return
-// 				} else {
-// 					fmt.Println("Your account number or PIN is incorrect, please try with the right username and password")
-// 					i = worldBank.Banks[bankIdx].nCustomer
-// 				}
-// 			}
-// 		}
-// 	}
-// 	fmt.Println()
-// 	fmt.Println("You have reached the maximum number for 3 attempts, try again")
-// 	fmt.Println()
-// }
 
 func isSuperAdmin(credential Credential) bool {
 	if credential.username == SuperAdmin.username && credential.password == SuperAdmin.password {

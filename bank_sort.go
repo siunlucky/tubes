@@ -1,10 +1,9 @@
 package main
 
-import "fmt"
-
 func sortBankByUniqueCode(worldBank *WorldBank, method string, direction string) {
-	// Selection Sort & insertion sort
+	// Selection Sort
 	if method == "selection" {
+		// Ascending
 		if direction == "asc" {
 			for i := 0; i < worldBank.nBank-1; i++ {
 				minIndex := i
@@ -15,6 +14,7 @@ func sortBankByUniqueCode(worldBank *WorldBank, method string, direction string)
 				}
 				worldBank.Banks[i], worldBank.Banks[minIndex] = worldBank.Banks[minIndex], worldBank.Banks[i]
 			}
+			// Descending
 		} else if direction == "desc" {
 			for i := 0; i < worldBank.nBank-1; i++ {
 				maxIndex := i
@@ -26,7 +26,9 @@ func sortBankByUniqueCode(worldBank *WorldBank, method string, direction string)
 				worldBank.Banks[i], worldBank.Banks[maxIndex] = worldBank.Banks[maxIndex], worldBank.Banks[i]
 			}
 		}
-	} else if method == "insertion" {
+		// Insertion sort
+	} else {
+		// Ascending
 		if direction == "asc" {
 			for i := 1; i < worldBank.nBank; i++ {
 				key := worldBank.Banks[i]
@@ -37,6 +39,7 @@ func sortBankByUniqueCode(worldBank *WorldBank, method string, direction string)
 				}
 				worldBank.Banks[j+1] = key
 			}
+			// Descending
 		} else if direction == "desc" {
 			for i := 1; i < worldBank.nBank; i++ {
 				key := worldBank.Banks[i]
@@ -48,7 +51,5 @@ func sortBankByUniqueCode(worldBank *WorldBank, method string, direction string)
 				worldBank.Banks[j+1] = key
 			}
 		}
-	} else {
-		fmt.Println("Method not found")
 	}
 }

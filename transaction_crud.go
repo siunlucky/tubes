@@ -69,13 +69,13 @@ func transfer(customer *Customer) {
 				fmt.Scan(&bankIdx)
 			}
 
-			// Adjust bank index for proper selection
-			for i := 0; i < worldBank.nBank; i++ {
+			var found bool = true
+			for i := 0; i < worldBank.nBank && found; i++ {
 				if worldBank.Banks[i].uniqueCode != customer.bankCode {
 					bankIdx--
 					if bankIdx == 0 {
 						bankIdx = i
-						break
+						found = false
 					}
 				}
 			}

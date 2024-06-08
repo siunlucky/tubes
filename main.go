@@ -15,7 +15,6 @@ func menu() {
 	var startMenu bool = true
 	var guestChoice int
 	fmt.Println()
-	clearTerminal()
 	fmt.Println("What user are you?")
 	fmt.Println("1. Super Admin")
 	fmt.Println("2. Bank Admin")
@@ -36,13 +35,10 @@ func menu() {
 
 	switch guestChoice {
 	case 1:
-		clearTerminal()
 		loginSuperAdmin()
 	case 2:
-		clearTerminal()
 		loginAdmin()
 	case 3:
-		clearTerminal()
 		loginCustomer()
 	case 4:
 		exit()
