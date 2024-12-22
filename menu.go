@@ -89,12 +89,12 @@ func searchDataCustomerMenu() {
 			customerIdx = searchCustomerByName(bankIdx, searchName)
 			printCustomerData(bankIdx, customerIdx)
 		} else if searchChoice == 2 {
+			// var idx int = 0;
+			// customerIdx = searchCustomerByAccountNumberv2(bankIdx, searchAccountNumber, idx)
 			fmt.Print("Input account number to search : ")
 			var searchAccountNumber int
 			fmt.Scan(&searchAccountNumber)
 			customerIdx = searchCustomerByAccountNumber(bankIdx, searchAccountNumber)
-			// var idx int = 0;
-			// customerIdx = searchCustomerByAccountNumberv2(bankIdx, searchAccountNumber, idx)
 			printCustomerData(bankIdx, customerIdx)
 		} else if searchChoice == 3 {
 			fmt.Print("Input card number to search : ")
