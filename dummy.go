@@ -28,7 +28,7 @@ func dummyDataCustomer(bankIdx, n int) {
 	for i := 0; i < n; i++ {
 		worldBank.Banks[bankIdx].customers[i] = Customer{
 			accountNumber: codeGenerator(10000000, 99999999),
-			balance:       50000 + (i * 100000),
+			balance:       50000 + (i * 100),
 			cardNumber:    codeGenerator(1000000000000000, 9999999999999999),
 			PIN:           "123456",
 			NIK:           codeGenerator(1000000000000000, 9999999999999999),

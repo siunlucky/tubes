@@ -1,10 +1,10 @@
 package main
 
-const NMAX = 1000
-const NMAX_Bank = 10
-const NMAX_Admin = 10
+const NMAX = 50
+const NMAX_Bank = 50
+const NMAX_Admin = 50
 const MAX_BALANCE = 1000000000
-const NMAX_Transactions = 100
+const NMAX_Transactions = 1000
 
 var worldBank WorldBank
 
