@@ -5,7 +5,7 @@ import "fmt"
 var startProgram bool = true
 
 func main() {
-	dummyData(50)
+	dummyData(10)
 	for startProgram {
 		menu()
 	}

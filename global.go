@@ -1,8 +1,8 @@
 package main
 
-const NMAX = 50
-const NMAX_Bank = 50
-const NMAX_Admin = 50
+const NMAX = 10
+const NMAX_Bank = 10
+const NMAX_Admin = 10
 const MAX_BALANCE = 1000000000
 const NMAX_Transactions = 1000
 
